@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>InternetBookstore</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <ul class="nav nav-tabs justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="#">購物車</a>
+    </li>
+    <li class="nav-item">
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-light" type="submit">Search</button>
+      </form>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Login</a>
+    </li>
+  </ul>
+  <div class="container">
+    <div class="jumbotron text-Info">
+      <img class="float-right" src="https://www.jiumodiary.com/images/front/eleps.png" style="width:29%;height:25%">
+      <h1>InternetBookstore</h1>
+      <p>Welcome to InternetBookstore!!</p>
+    </div>
+    <!-- carousel -->
+    {% include 'carousel.html' %}
+</body>
+
+</html>

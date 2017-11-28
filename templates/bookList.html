@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Books</title>
+</head>
+
+<body>
+  <h1>Books</h1>
+  <table class="table" id="book-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Bookname</th>
+        <th>Authoor</th>
+        <th>Publisher</th>
+        <th>Publish_Date</th>
+        <th>Photo</th>
+        <th>Language</th>
+        <th>Stock</th>
+        <th>State</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in book_list %}
+      <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.bookname }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.publisher }}</td>
+        <td>{{ book.publish_date }}</td>
+        <td><img src='{{ book.photo }}'></td>
+        <td>{{ book.language }}</td>
+        <td>{{ book.stock }}</td>
+        <td>{{ book.state }}</td>
+      </tr>
+      <p>{{ book.description }}</p>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+
+</html>

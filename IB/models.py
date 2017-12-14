@@ -28,8 +28,38 @@ class Book(models.Model):
     state = models.BooleanField()
     price = models.IntegerField()
     stock = models.IntegerField()
-    language = models.CharField(max_length=10)
-    category = models.CharField(max_length=10)
+    Foreign = 'FR'
+    Chinese = 'CH'
+    LANGUAGE_CHOICES = (
+        (Foreign, 'English'),
+        (Chinese, 'Chinese'),
+    )
+    language = models.CharField(max_length=10,
+                                choices=LANGUAGE_CHOICES,
+                                default=Chinese)
+    Literature = 'literature'
+    Art = 'art'
+    Life = 'life'
+    Comics = 'comics'
+    Science = 'science'
+    Society = 'society'
+    Language = 'language'
+    Computer = 'computer'
+    Else = 'else'
+    CATEGORY_CHOICES = (
+        (Literature, 'Literature'),
+        (Art, 'Art'),
+        (Life, 'Life'),
+        (Comics, 'Comics'),
+        (Science, 'Science'),
+        (Society, 'Society'),
+        (Language, 'Language'),
+        (Computer, 'Computer'),
+        (Else, 'Else'),
+    )
+    category = models.CharField(max_length=10,
+                                choices=CATEGORY_CHOICES,
+                                default=Else)
 
     def __str__(self):
         return self.bookname

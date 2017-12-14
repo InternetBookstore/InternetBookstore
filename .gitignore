@@ -1,0 +1,15 @@
+
+*.pyc
+*.pyc
+IB/__pycache__/__init__.cpython-34.pyc
+IB/__pycache__/__init__.cpython-34.pyc
+IB/__pycache__/admin.cpython-34.pyc
+IB/__pycache__/form.cpython-34.pyc
+IB/__pycache__/views.cpython-34.pyc
+IB/migrations/__pycache__/0001_initial.cpython-34.pyc
+IB/migrations/__pycache__/0002_book.cpython-34.pyc
+IB/migrations/__pycache__/0003_auto_20171127_1523.cpython-34.pyc
+IB/migrations/__pycache__/0004_auto_20171128_2329.cpython-34.pyc
+IB/migrations/__pycache__/0005_auto_20171129_1718.cpython-34.pyc
+IB/migrations/__pycache__/0006_auto_20171129_2319.cpython-34.pyc
+IB/migrations/__pycache__/0007_remove_account_photo.cpython-34.pyc

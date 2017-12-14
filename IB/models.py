@@ -15,7 +15,6 @@ class Account(models.Model):
     is_active = models.BooleanField()
     date_joined = models.DateTimeField()
     last_login = models.DateTimeField()
-    photo = models.ImageField(upload_to='img', null=True)
 
 
 class Book(models.Model):
@@ -25,7 +24,7 @@ class Book(models.Model):
     publisher = models.CharField(max_length=30)
     publish_date = models.DateField()
     description = models.TextField(null=True)
-    photo = models.ImageField(upload_to='img', null=True)
+    photo = models.URLField(null=True)
     state = models.BooleanField()
     price = models.IntegerField()
     stock = models.IntegerField()

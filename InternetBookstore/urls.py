@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home),
     url(r'^books/$', book_list, name='book_list'),
+    url(r'^books/add_book/$', add_book, name='add_book'),
+    url(r'^books/edit_book/(?P<book_id>\d+)/$', edit_book, name='edit_book')
 ]

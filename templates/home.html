@@ -38,8 +38,29 @@
       <h1>InternetBookstore</h1>
       <p>Welcome to InternetBookstore!!</p>
     </div>
+    <ul class="nav nav-tabs justify-content-center nav-justified">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">主頁</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">中文書</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">外文書</a>
+      </li>
+    </ul>
     <!-- carousel -->
     {% include 'carousel.html' %}
+    <div>
+      <h5>精選書籍</h5>
+    </div>
+    <div id="books_item" class="container" style="height:80%;width:80%">
+      {% include 'books_item.html' %}
+    </div>
 </body>
-
+<footer style="text-align:center">
+  <p>Posted by: Tsai</p>
+  <p>Contact information: <a href="mailto:wto2005716@yahoo.com.tw">
+  wto2005716@yahoo.com.tw</a>.</p>
+</footer>
 </html>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>InternetBookstore</title>
+  <title>{% block title %}{% endblock %}</title>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 
@@ -35,15 +35,17 @@
   <div class="container">
     <div class="jumbotron text-Info">
       <img class="float-right" src="https://www.jiumodiary.com/images/front/eleps.png" style="width:29%;height:25%">
-      <h1>InternetBookstore</h1>
-      <p>Welcome to InternetBookstore!!</p>
+      <div>
+          <a href="/"><h1>InternetBookstore</h1></a>
+          <p>Welcome to InternetBookstore!!</p>
+      </div>
     </div>
     <ul class="nav nav-tabs justify-content-center nav-justified">
       <li class="nav-item">
-        <a class="nav-link active" href="#">主頁</a>
+        <a class="nav-link active" href="/">主頁</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">中文書</a>
+        <a class="nav-link" href="{% url "IB:book_list"%}">中文書</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">外文書</a>

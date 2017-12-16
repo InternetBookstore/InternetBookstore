@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 from Account.models import Account
 # Create your models here.
@@ -19,6 +20,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('IB:book_list_by_category',
+                        args=[self.slug])
 
 class Book(models.Model):
     isbn = models.CharField(max_length=30, unique=True)
@@ -50,6 +55,10 @@ class Book(models.Model):
 
     def __str__(self):
         return self.bookname
+
+    def get_absolute_url(self):
+        return reverse('IB:book_detail',
+                        args=[self.id, self.slug])
 
 
 class DiscountPolicy(models.Model):

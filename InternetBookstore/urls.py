@@ -21,4 +21,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('IB.urls', namespace='IB')),
+    url(r'^cart/', include('cart.urls', namespace='cart')),
 ]

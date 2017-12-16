@@ -1,5 +1,6 @@
 {% extends "./base.html "%}
 {% load staticfiles %}
+{% load bootstrap3 %}
 
 {% block title %}
     {% if category %}{{ category.title }}{% else %}Books{% endif %}
@@ -28,7 +29,15 @@
                 </div>
                 <p>{{ book.description }}</p>
                 <h2><a href="{{ book.category.get_absolute_url }}">{{ book.category }}</a></h2>
-            <!--  cart  -->
+                <form action="{% url "cart:cart_add" book.id %}" method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form cart_book_form %}
+                            {% buttons %}
+                                <button type="submit" class="btn btn-success btn-product">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span> Add to cart
+                                </button>
+                            {% endbuttons %}
+                        </form>
             </div>
         </div>
     </div>

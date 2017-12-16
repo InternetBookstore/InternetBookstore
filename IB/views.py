@@ -3,6 +3,7 @@ from datetime import datetime
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .models import *
+from cart.forms import CartAddBookForm
 
 # Create your views here.
 
@@ -26,9 +27,11 @@ def book_list(request, category_slug=None):
 def book_detail(request, book_id, slug):
     book = get_object_or_404(Book, id=book_id,
                              slug=slug,state=True)
+    cart_book_form = CartAddBookForm()
     return render(request,
                   'bookdetail.html',
-                  {'book':book})
+                  {'book':book,
+                   'cart_book_form': cart_book_form})
 
 # def add_book(request):
 #     if request.method == 'POST':

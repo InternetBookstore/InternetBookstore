@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls import url, include
+from django.conf.urls.static import static
 from django.contrib import admin
 
 
@@ -23,3 +24,7 @@ urlpatterns = [
     url(r'^', include('IB.urls', namespace='IB')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

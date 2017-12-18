@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from Account.models import Account
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -17,13 +17,13 @@ class Category(models.Model):
         verbose_name = 'category'
         verbose_name_plural = 'categories'
 
-
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('IB:book_list_by_category',
-                        args=[self.slug])
+                       args=[self.slug])
+
 
 class Book(models.Model):
     isbn = models.CharField(max_length=30, unique=True)
@@ -47,7 +47,7 @@ class Book(models.Model):
                                 choices=LANGUAGE_CHOICES,
                                 default=Chinese)
     category = models.ForeignKey(Category,
-                                related_name='books')
+                                 related_name='books')
 
     class Meta:
         ordering = ('bookname',)
@@ -58,7 +58,7 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         return reverse('IB:book_detail',
-                        args=[self.id, self.slug])
+                       args=[self.id, self.slug])
 
 
 class DiscountPolicy(models.Model):
@@ -69,6 +69,6 @@ class DiscountPolicy(models.Model):
 
 class Comment(models.Model):
     book_id = models.ForeignKey(Book, null=True)
-    account_id = models.ForeignKey(Account, null=True)
+    account_id = models.ForeignKey(User, null=True)
     description = models.TextField()
     date_time = models.DateTimeField()

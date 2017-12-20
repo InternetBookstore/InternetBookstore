@@ -1,0 +1,50 @@
+a:hover, a:focus, a:active, a:visited, a:link {
+    text-decoration: none;
+}
+
+/*
+    @hiercelik - hiercelik.net
+    @koalapix - koalapix.com
+*/
+@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web&subset=latin,latin-ext);
+@media (min-width: 768px) {
+    .kpx_row-sm-offset-3 div:first-child[class*="col-"] {
+        margin-left: 25%;
+    }
+}
+
+body {
+    font-family: 'Titillium Web', sans-serif;
+}
+
+a {
+    color: #ff5400;
+}
+
+a:hover {
+    opacity: 0.8;
+    color: #ff5400;
+    text-decoration: none;
+}
+
+.kpx_login .kpx_authTitle {
+    text-align: center;
+    line-height: 300%;
+}
+
+
+.kpx_login .kpx_loginForm .input-group.i {
+    width: 2em;
+}
+
+.kpx_login .kpx_loginForm .help-block {
+    color: red;
+}
+
+@media (min-width: 768px) {
+    .kpx_login .kpx_forgotPwd {
+        text-align: right;
+        margin-top: 10px;
+    }
+}

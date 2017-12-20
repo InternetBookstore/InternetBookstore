@@ -19,18 +19,26 @@
 
 <body>
   <ul class="nav nav-tabs justify-content-end">
-    <li class="nav-item">
-      <a class="nav-link" href="#">購物車</a>
-    </li>
+  <li class="nav-item">
+  {% if request.user.is_authenticated %}
+      <a class="nav-link" href="#"> Hello {{ request.user.first_name }}</a>
+  </li>
+  <li class="nav-item">
+      <a class="nav-link" href="{% url "Account:logout" %}">Logout</a>
+  {% else %}
+      <a class="nav-link" href="{% url "Account:login" %}">Login</a>
+  {% endif %}
+  </li>
     <li class="nav-item">
       <form class="form-inline">
         <input class="form-control mr-sm-2" type="text" placeholder="Search">
         <button class="btn btn-light" type="submit">Search</button>
       </form>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url "cart:cart_detail" %}">購物車</a>
+      </li>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Login</a>
-    </li>
+
   </ul>
   <div class="container">
     <div class="jumbotron text-Info">

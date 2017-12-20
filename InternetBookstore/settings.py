@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from django.core.urlresolvers import reverse_lazy
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,7 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'IB',
     'cart',
     'orders',
-    'Account'
+    'Account',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
+
+# 設定 Django 在 console 中輸出 e-mail 內容來代替通過 SMTP 服務發送郵件
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# EMAIL
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'gay1235689@gmail.com'
+EMAIL_HOST_PASSWORD = 'shit1235689'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+AUTHENTICATION_BACKENDS = ('Account.authentication.EmailAuthBackend',
+                           'django.contrib.auth.backends.ModelBackend',)
+
 
 CART_SESSION_ID = 'cart'
 

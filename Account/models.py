@@ -8,11 +8,11 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    address = models.CharField(max_length=60)
-    cellphone = models.CharField(max_length=10)
-    birthday = models.DateField()
+    address = models.CharField(max_length=60,null=True)
+    cellphone = models.CharField(max_length=10,null=True)
+    birthday = models.DateField(null=True)
     photo = models.ImageField(upload_to="media/", blank=True, null=True)
-    credit_card = models.CharField(max_length=50, blank=True)
+    credit_card = models.CharField(max_length=50, blank=True,null=True)
 
 
 @receiver(post_save, sender=User)

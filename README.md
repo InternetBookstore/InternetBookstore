@@ -9,6 +9,7 @@
 4.打開cmd 打
 pip install django
 pip install django-bootstrap3
+pip install Pillow
 
  5.打開heidisql
  新建(隨便名稱) 密碼看你有沒有設 沒有的話就直接 打開

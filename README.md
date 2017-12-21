@@ -22,6 +22,9 @@ python manage.py runserver
 如果有connector問題 在cmd打
 pip install mysql-connector-python --allow-external mysql-connector-python
 
+如果你MYSQL有設密碼->用Atom打開專案 進去InternetBookstore->settings 更改Database裡面
+的PASSWORD為你MySQL的密碼
+
 8.打開瀏覽器 打 127.0.0.1:8000/admin
 帳:admin
 密:adminadmin

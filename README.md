@@ -16,7 +16,7 @@ pip install django-bootstrap3
 6.加載
 文件->加載SQL文件->選擇專案資料夾裡面的SQL->initial.sql->按藍色的播放(叉叉旁)
 
-7.打開atom 打開terminal 或是直接打開 cmd 到專案資料夾 打
+7.直接打開 cmd 到專案資料夾 ($ cd ...)打
 python manage.py runserver
 
 8.打開瀏覽器 打 127.0.0.1:8000/admin

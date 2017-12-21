@@ -40,7 +40,7 @@ class Book(models.Model):
     Foreign = 'FR'
     Chinese = 'CH'
     LANGUAGE_CHOICES = (
-        (Foreign, 'English'),
+        (Foreign, 'Foreign'),
         (Chinese, 'Chinese'),
     )
     language = models.CharField(max_length=10,

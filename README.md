@@ -28,7 +28,7 @@ pip install mysql-connector-python --allow-external mysql-connector-python
 
 8.打開瀏覽器 打 127.0.0.1:8000/admin
 帳:admin
-密:adminadmin
+密:adminadmin(如果沒有就在cmd 打python manage.py createsuperuser創一組 然後再跑server)
 
 9.Add Book
 

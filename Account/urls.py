@@ -11,6 +11,8 @@ from django.contrib.auth.views import password_reset_done
 
 from . import views
 
+app_name = 'Account'
+
 urlpatterns = [
 
     # url(r'^$', views.home, name='home'),

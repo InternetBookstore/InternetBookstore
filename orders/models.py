@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 
 class Order(models.Model):
-    account_id = models.ForeignKey(User)
+    account_id = models.ForeignKey(User, on_delete=models.CASCADE)
     shipment_cost = models.IntegerField()
     books_cost = models.IntegerField()
     order_date = models.DateTimeField()
@@ -18,8 +18,8 @@ class Order(models.Model):
 
 
 class OrderList(models.Model):
-    order_id = models.ForeignKey(Order)
-    book_id = models.ForeignKey(Book)
+    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
     book_quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):

@@ -1,9 +1,8 @@
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from django.contrib.auth.models import User
 # Create your models here.
-
 
 class Category(models.Model):
     name = models.CharField(max_length=50,
@@ -47,7 +46,9 @@ class Book(models.Model):
                                 choices=LANGUAGE_CHOICES,
                                 default=Chinese)
     category = models.ForeignKey(Category,
-                                 related_name='books')
+                                 related_name='books',
+                                 null=True,
+                                 on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ('bookname',)
@@ -68,7 +69,7 @@ class DiscountPolicy(models.Model):
 
 
 class Comment(models.Model):
-    book_id = models.ForeignKey(Book, null=True)
-    account_id = models.ForeignKey(User, null=True)
+    book_id = models.ForeignKey(Book, null=True, on_delete=models.CASCADE)
+    account_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     description = models.TextField()
     date_time = models.DateTimeField()

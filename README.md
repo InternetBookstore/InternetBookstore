@@ -16,8 +16,11 @@ pip install django-bootstrap3
 6.加載
 文件->加載SQL文件->選擇專案資料夾裡面的SQL->initial.sql->按藍色的播放(叉叉旁)
 
-7.直接打開 cmd 到專案資料夾 ($ cd ...)打
+7.直接打開 cmd 到專案資料夾 ($ cd ...) 打
 python manage.py runserver
+
+如果有connector問題 在cmd打
+pip install mysql-connector-python --allow-external mysql-connector-python
 
 8.打開瀏覽器 打 127.0.0.1:8000/admin
 帳:admin

@@ -36,4 +36,4 @@ pip install mysql-connector-python --allow-external mysql-connector-python
 打開heidisql->按我們的資料庫(internetbookstore)右鍵->匯出資料腳本(SQL資料夾裡有圖)->
 覆蓋我們initial.sql檔->匯出
 
-11.PUSH(push完再群組說一下)
+11.直接將initial.sql傳到群組來

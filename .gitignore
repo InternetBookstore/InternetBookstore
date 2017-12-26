@@ -14,3 +14,4 @@ IB/migrations/__pycache__/0005_auto_20171129_1718.cpython-34.pyc
 IB/migrations/__pycache__/0006_auto_20171129_2319.cpython-34.pyc
 IB/migrations/__pycache__/0007_remove_account_photo.cpython-34.pyc
 *.pyc
+*.pyc

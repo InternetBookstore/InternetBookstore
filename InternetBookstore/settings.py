@@ -135,18 +135,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-LOGIN_URL = reverse_lazy('login')
-LOGOUT_URL = reverse_lazy('logout')
 
 # 設定 Django 在 console 中輸出 e-mail 內容來代替通過 SMTP 服務發送郵件
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # EMAIL
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'gay1235689@gmail.com'
-EMAIL_HOST_PASSWORD = 'shit1235689'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'gay1235689'
+EMAIL_HOST_PASSWORD = 'shit1235689'
 EMAIL_USE_TLS = True
 
 AUTHENTICATION_BACKENDS = ('Account.authentication.EmailAuthBackend',

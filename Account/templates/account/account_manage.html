@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ request.user.first_name }}的會員中心
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-3">
+        <h3>會員</h3>
+        <div class="list-group">
+            <div class="active">
+                <a class="list-group-item list-group-item-action"
+                href="{% url "Account:profile"%}">編輯會員</a>
+            </div>
+
+            <div class="active">
+                <a class="list-group-item list-group-item-action"
+                href="">訂單查詢</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+
+    </div>
+</div>
+{% endblock%}

@@ -16,6 +16,8 @@ app_name = 'Account'
 urlpatterns = [
 
     # url(r'^$', views.home, name='home'),
+    url(r'^account_manage/$', views.account_manage, name='account_manage'),
+    url(r'^profile/$', views.update_profile, name='profile'),
     url(r'^register/$', views.register, name='register'),
 
     # login logout
@@ -25,21 +27,22 @@ urlpatterns = [
 
     # change password
     url(r'^password-change/$', password_change, name='password_change'),
-    url(r'^password-change/done/$', password_change_done, name='password_change_done'),
+    url(r'^password-change/done/$', password_change_done,
+        name='password_change_done'),
 
     # reset password
     # restore password urls
     url(r'^password_reset/$',
-        password_reset,{
-        'post_reset_redirect': '/Account/password_reset/done/'
+        password_reset, {
+            'post_reset_redirect': '/Account/password_reset/done/'
         },
         name='password_reset'),
     url(r'^password_reset/done/$',
         password_reset_done,
         name='password_reset_done'),
     url(r'^password_reset/confirm/(?P<uidb64>[-\w]+)/(?P<token>[-\w]+)/$',
-        password_reset_confirm,{
-        'post_reset_redirect': '/Account/reset/done/'
+        password_reset_confirm, {
+            'post_reset_redirect': '/Account/reset/done/'
         },
         name='password_reset_confirm'),
     url(r'^reset/done/$',

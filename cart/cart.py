@@ -2,6 +2,7 @@ from decimal import Decimal
 from django.conf import settings
 from IB.models import Book
 
+
 class Cart(object):
     def __init__(self, request):
         self.session = request.session
@@ -45,8 +46,14 @@ class Cart(object):
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
 
-    def get_total_price(self):
+    def get_book_price(self):
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def get_shipment_cost(self):
+        return 60
+
+    def get_total_cost(self):
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values()) + 60
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]

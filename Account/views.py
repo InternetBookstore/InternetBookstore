@@ -2,15 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 # Create your views here.
 
 from .forms import *
 
-
-# @login_required
-# def home(request):
-#     return render(request, 'IB:home')
 
 @login_required
 def account_manage(request):

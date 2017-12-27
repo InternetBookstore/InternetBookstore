@@ -67,7 +67,7 @@
                     <td>  </td>
                     <td>  </td>
                     <td><h3>Total</h3></td>
-                    <td class="text-right"><h3><strong>${{ cart.get_total_price }}</strong></h3></td>
+                    <td class="text-right"><h3><strong>${{ cart.get_book_price }}</strong></h3></td>
             </tr>
             <tr>
                     <td>  </td>
@@ -80,7 +80,7 @@
                     </td>
                     <td>
 
-                        <a href="#" class="btn btn-default">Checkout
+                        <a href="{% url "orders:order_create" %}" class="btn btn-default">Checkout
                             <i class="glyphicon glyphicon-play" aria-hidden="true"></i>
                         </a>
                     </td>

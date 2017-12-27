@@ -7,9 +7,10 @@ from .forms import CartAddBookForm
 
 # Create your views here.
 
+
 @require_POST
 def cart_add(request, book_id):
-    cart= Cart(request)
+    cart = Cart(request)
     book = get_object_or_404(Book, id=book_id)
     form = CartAddBookForm(request.POST)
     if form.is_valid():
@@ -17,7 +18,8 @@ def cart_add(request, book_id):
         cart.add(book=book,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
-    return redirect('cart:cart_detail')
+    return redirect('IB:book_list')
+
 
 def cart_remove(request, book_id):
     cart = Cart(request)
@@ -25,13 +27,14 @@ def cart_remove(request, book_id):
     cart.remove(book)
     return redirect('cart:cart_detail')
 
+
 def cart_detail(request):
     cart = Cart(request)
     # 使用 for in 的時候，他會開始迭代，並且呼叫 `__iter__`
     for item in cart:
         item['update_quantity_form'] = CartAddBookForm(
             initial={
-            'quantity': item['quantity'],
-            'update': True
+                'quantity': item['quantity'],
+                'update': True
             })
     return render(request, 'cart_detail.html', {'cart': cart})

@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^', include('IB.urls', namespace='IB')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^Account/', include('Account.urls', namespace='Account')),
+    url(r'^orders/', include('orders.urls', namespace='orders')),
 ]
 
 if settings.DEBUG:

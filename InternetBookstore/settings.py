@@ -27,7 +27,7 @@ SECRET_KEY = '*+3n4bw9bkvv!4$t&f5&io%7s*04wq7v8jr3$3_(wh2zm78ln4'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+LOGIN_URL = '/Account/login/'
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',

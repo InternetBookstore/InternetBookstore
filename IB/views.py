@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from datetime import datetime
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.db.models import Q
+
 from .models import *
 from cart.forms import CartAddBookForm
 
@@ -16,6 +18,14 @@ def book_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     books = Book.objects.filter(state=True)
+    query = request.GET.get("q")
+    if query:
+        books = books.filter(
+            Q(bookname__icontains=query) |
+            Q(author__icontains=query) |
+            Q(publisher__icontains=query) |
+            Q(isbn__icontains=query) |
+            Q(category__name__icontains=query)).distinct()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         books = books.filter(category=category)

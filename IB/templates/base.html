@@ -31,8 +31,8 @@
   {% endif %}
   </li>
     <li class="nav-item">
-      <form class="form-inline">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <form action="{% url "IB:book_list" %}" class="form-inline" method="GET">
+          <input name="q" class="form-control mr-sm-2" type="text" placeholder="Search" value='{{ request.GET.q }}'>
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
       <li class="nav-item">

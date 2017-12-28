@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- 主機:                           127.0.0.1
--- 伺服器版本:                        5.7.19-log - MySQL Community Server (GPL)
--- 伺服器操作系統:                      Win64
--- HeidiSQL 版本:                  9.5.0.5196
+-- 服務器版本:                        5.7.19-log - MySQL Community Server (GPL)
+-- 服務器操作系統:                      Win64
+-- HeidiSQL 版本:                  9.4.0.5125
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,33 +12,31 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- 傾印 internetbookstore 的資料庫結構
+-- 導出 internetbookstore 的資料庫結構
 CREATE DATABASE IF NOT EXISTS `internetbookstore` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `internetbookstore`;
 
--- 傾印  表格 internetbookstore.account_profile 結構
+-- 導出  表 internetbookstore.account_profile 結構
 CREATE TABLE IF NOT EXISTS `account_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(60) DEFAULT NULL,
   `cellphone` varchar(10) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `photo` varchar(100) DEFAULT NULL,
   `credit_card` varchar(50) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`),
   CONSTRAINT `Account_profile_user_id_7cdd8c19_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.account_profile 的資料：~3 rows (大約)
+-- 正在導出表  internetbookstore.account_profile 的資料：~2 rows (大約)
 /*!40000 ALTER TABLE `account_profile` DISABLE KEYS */;
-INSERT INTO `account_profile` (`id`, `address`, `cellphone`, `birthday`, `photo`, `credit_card`, `user_id`) VALUES
-	(1, NULL, NULL, NULL, '', NULL, 3),
-	(2, NULL, NULL, NULL, '', NULL, 4),
-	(3, NULL, NULL, NULL, '', NULL, 5);
+INSERT INTO `account_profile` (`id`, `address`, `cellphone`, `birthday`, `credit_card`, `user_id`) VALUES
+	(3, NULL, NULL, NULL, NULL, 5),
+	(7, '台北市大安區忠孝東路三段277-4號', '0977777771', NULL, NULL, 9);
 /*!40000 ALTER TABLE `account_profile` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.auth_group 結構
+-- 導出  表 internetbookstore.auth_group 結構
 CREATE TABLE IF NOT EXISTS `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(80) NOT NULL,
@@ -46,11 +44,11 @@ CREATE TABLE IF NOT EXISTS `auth_group` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.auth_group 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.auth_group 的資料：~0 rows (大約)
 /*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.auth_group_permissions 結構
+-- 導出  表 internetbookstore.auth_group_permissions 結構
 CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
@@ -62,11 +60,11 @@ CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.auth_group_permissions 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.auth_group_permissions 的資料：~0 rows (大約)
 /*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.auth_permission 結構
+-- 導出  表 internetbookstore.auth_permission 結構
 CREATE TABLE IF NOT EXISTS `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -77,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.auth_permission 的資料：~39 rows (大約)
+-- 正在導出表  internetbookstore.auth_permission 的資料：~39 rows (大約)
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
 	(1, 'Can add log entry', 1, 'add_logentry'),
@@ -121,7 +119,7 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 	(39, 'Can delete profile', 13, 'delete_profile');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.auth_user 結構
+-- 導出  表 internetbookstore.auth_user 結構
 CREATE TABLE IF NOT EXISTS `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
@@ -129,24 +127,23 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
   `is_superuser` tinyint(1) NOT NULL,
   `username` varchar(150) NOT NULL,
   `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
   `email` varchar(254) NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.auth_user 的資料：~3 rows (大約)
+-- 正在導出表  internetbookstore.auth_user 的資料：~2 rows (大約)
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-	(3, 'pbkdf2_sha256$36000$ISrL9kWElUkL$NdGNpclwlMqUdBzUu5lahm0RZiVR5rAg/hRoJ8J5O4Y=', '2017-12-20 19:34:39.398965', 1, 'adm', '', '', 'wto2005716@yahoo.com.tw', 1, 1, '2017-12-20 18:33:52.885241'),
-	(4, 'pbkdf2_sha256$36000$OnX9rNufXkxf$p/5wTw5s26IcD2yq6O/tFsu8A8YypqWr3ON4B/FOdDA=', '2017-12-20 19:24:05.318736', 0, 'asd', 'QQQ', '', 'asd@aaaaaa.aaa.aa', 0, 1, '2017-12-20 19:23:52.750212'),
-	(5, 'pbkdf2_sha256$100000$YufaEcS88JJq$CBaPmpG5zPPlE2cwCcKhA7l+LErNg2NAZgHnIXs42j8=', '2017-12-23 02:39:10.724388', 1, 'admin', '', '', 'admin@yahoo.com.tw', 1, 1, '2017-12-21 09:27:38.106101');
+	(5, 'pbkdf2_sha256$100000$YufaEcS88JJq$CBaPmpG5zPPlE2cwCcKhA7l+LErNg2NAZgHnIXs42j8=', '2017-12-28 02:52:02.324668', 1, 'admin', '', '', 'admin@yahoo.com.tw', 1, 1, '2017-12-21 09:27:38.106101'),
+	(9, 'pbkdf2_sha256$100000$XyN94Xf7Q6jr$S/G3zN//eJ06eHrynTZMyIJb/cgjomoDLEGTvSDCYbQ=', '2017-12-27 20:40:26.904897', 0, 'wto2005716', 'WenXue', 'Tsai', 'wto2005716@yahoo.com.tw', 0, 1, '2017-12-27 15:58:20.399651');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.auth_user_groups 結構
+-- 導出  表 internetbookstore.auth_user_groups 結構
 CREATE TABLE IF NOT EXISTS `auth_user_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -158,11 +155,11 @@ CREATE TABLE IF NOT EXISTS `auth_user_groups` (
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.auth_user_groups 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.auth_user_groups 的資料：~0 rows (大約)
 /*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.auth_user_user_permissions 結構
+-- 導出  表 internetbookstore.auth_user_user_permissions 結構
 CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -174,11 +171,11 @@ CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.auth_user_user_permissions 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.auth_user_user_permissions 的資料：~0 rows (大約)
 /*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.django_admin_log 結構
+-- 導出  表 internetbookstore.django_admin_log 結構
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
@@ -193,9 +190,9 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.django_admin_log 的資料：~22 rows (大約)
+-- 正在導出表  internetbookstore.django_admin_log 的資料：~72 rows (大約)
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
 	(1, '2017-12-25 03:40:56.026047', '5', '鋼之鍊金術師15週年紀念版 (27冊合售)', 1, '[{"added": {}}]', 7, 5),
@@ -264,10 +261,15 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 	(64, '2017-12-25 07:56:13.774973', '46', 'Living with Pattern', 2, '[{"changed": {"fields": ["bookname"]}}]', 7, 5),
 	(65, '2017-12-25 07:56:24.072066', '55', 'Re:Crafted', 2, '[{"changed": {"fields": ["bookname"]}}]', 7, 5),
 	(66, '2017-12-25 07:58:59.868376', '51', 'The Finer Things', 2, '[{"changed": {"fields": ["bookname"]}}]', 7, 5),
-	(67, '2017-12-25 08:00:54.316335', '56', '50Habitations Extraordinaires Pour BudgetOrdinaire', 2, '[{"changed": {"fields": ["bookname"]}}]', 7, 5);
+	(67, '2017-12-25 08:00:54.316335', '56', '50Habitations Extraordinaires Pour BudgetOrdinaire', 2, '[{"changed": {"fields": ["bookname"]}}]', 7, 5),
+	(68, '2017-12-27 15:45:40.381502', '6', 'wto2005716', 3, '', 4, 5),
+	(69, '2017-12-27 15:45:46.044080', '4', 'asd', 3, '', 4, 5),
+	(70, '2017-12-27 15:45:52.724306', '3', 'adm', 3, '', 4, 5),
+	(71, '2017-12-27 15:56:52.758315', '7', 'wto2005716', 3, '', 4, 5),
+	(72, '2017-12-27 15:58:08.155113', '8', 'wto2005716', 3, '', 4, 5);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.django_content_type 結構
+-- 導出  表 internetbookstore.django_content_type 結構
 CREATE TABLE IF NOT EXISTS `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app_label` varchar(100) NOT NULL,
@@ -276,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.django_content_type 的資料：~13 rows (大約)
+-- 正在導出表  internetbookstore.django_content_type 的資料：~13 rows (大約)
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 	(13, 'Account', 'profile'),
@@ -294,16 +296,16 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 	(6, 'sessions', 'session');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.django_migrations 結構
+-- 導出  表 internetbookstore.django_migrations 結構
 CREATE TABLE IF NOT EXISTS `django_migrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.django_migrations 的資料：~17 rows (大約)
+-- 正在導出表  internetbookstore.django_migrations 的資料：~25 rows (大約)
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(1, 'contenttypes', '0001_initial', '2017-12-18 18:51:52.731539'),
@@ -322,10 +324,18 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(14, 'auth', '0008_alter_user_username_max_length', '2017-12-18 18:52:28.908439'),
 	(15, 'orders', '0001_initial', '2017-12-18 18:52:32.841793'),
 	(16, 'sessions', '0001_initial', '2017-12-18 18:52:33.554787'),
-	(17, 'Account', '0002_auto_20171221_0230', '2017-12-20 18:30:16.971786');
+	(17, 'Account', '0002_auto_20171221_0230', '2017-12-20 18:30:16.971786'),
+	(18, 'auth', '0009_alter_user_last_name_max_length', '2017-12-27 15:26:03.059831'),
+	(19, 'Account', '0003_remove_profile_photo', '2017-12-27 16:01:51.113569'),
+	(20, 'Account', '0004_auto_20171228_0122', '2017-12-27 17:23:04.710995'),
+	(21, 'orders', '0002_auto_20171228_0339', '2017-12-27 19:41:05.264337'),
+	(22, 'orders', '0003_auto_20171228_0340', '2017-12-27 19:41:05.853695'),
+	(23, 'orders', '0004_auto_20171228_0358', '2017-12-27 19:58:57.627821'),
+	(24, 'orders', '0005_auto_20171228_0429', '2017-12-27 20:29:34.633526'),
+	(25, 'orders', '0006_auto_20171228_0429', '2017-12-27 20:30:02.459327');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.django_session 結構
+-- 導出  表 internetbookstore.django_session 結構
 CREATE TABLE IF NOT EXISTS `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
@@ -334,12 +344,14 @@ CREATE TABLE IF NOT EXISTS `django_session` (
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.django_session 的資料：~13 rows (大約)
+-- 正在導出表  internetbookstore.django_session 的資料：~15 rows (大約)
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 	('2ipu5pxokl5gud81nkol52aogxprrnup', 'NWQzYjQ5ZTJjYTc0NjVlMjA0NTYyNWRkNmM1OTNkMGNjOTYyYWFhNjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiY2FydCI6e30sIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZTM0YWM1NzNhNjFlN2I3MThiNWRhNjkxZTM4N2ZhNjRmYzI2YmM4MyJ9', '2018-01-04 09:28:52.224730'),
 	('3s7htbfzjgg891atqtdggxyhaioivjvn', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-04 09:24:51.850222'),
+	('5xof1cscgph3lcolf3xw398ogpapi9ed', 'ZjdlMmY0ZDRhZTI5YTk5Njk5ZDVhZWIzZGEzNjNjOTM0YjNkYjZjZjp7ImNhcnQiOnt9LCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6Ijc2OTljZTNkNDFjZmI4NDAxZDJlY2VlMzNkZjA3N2M5YjNmYTE5NzciLCJfYXV0aF91c2VyX2lkIjoiOSJ9', '2018-01-10 18:34:27.391282'),
 	('bo2w89iri4sqdshxopv3lnzuguohrcrq', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 19:01:50.672938'),
+	('cjv78aywvu8zr9bg5esgenrjc3f1dxqx', 'ZmQ3Yzc3MWM1ZTk4NTAwM2FkY2NhMTRhMDJkZWQ5YmIwMjA1ZGIzYTp7Il9hdXRoX3VzZXJfaGFzaCI6IjFlOThmNzJlYjE0ZGZjNWFjYWE0MWM1YjcyOWE4NWYwNTI1MDQxZDkiLCJfYXV0aF91c2VyX2lkIjoiNSIsImNhcnQiOnt9LCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCJ9', '2018-01-11 02:55:38.947586'),
 	('i5ifgsxkuzqe8v2eo5jgy3062o7c64zw', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 18:46:16.158966'),
 	('idut2wh8trmwkhhhn43co0g5s7ke0gzx', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 18:56:06.739855'),
 	('m4ddngbwsuyvoh700ux7v4mlw8wfko0y', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 18:45:28.190842'),
@@ -352,7 +364,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 	('zm1mtdyx73wdvj85ig16nlbej6lrjz47', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 18:37:39.468085');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.ib_book 結構
+-- 導出  表 internetbookstore.ib_book 結構
 CREATE TABLE IF NOT EXISTS `ib_book` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `isbn` varchar(30) NOT NULL,
@@ -375,9 +387,9 @@ CREATE TABLE IF NOT EXISTS `ib_book` (
   KEY `IB_book_slug_09347f60` (`slug`),
   KEY `IB_book_category_id_81003bf1` (`category_id`),
   CONSTRAINT `IB_book_category_id_81003bf1_fk_IB_category_id` FOREIGN KEY (`category_id`) REFERENCES `ib_category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.ib_book 的資料：~24 rows (大約)
+-- 正在導出表  internetbookstore.ib_book 的資料：~64 rows (大約)
 /*!40000 ALTER TABLE `ib_book` DISABLE KEYS */;
 INSERT INTO `ib_book` (`id`, `isbn`, `bookname`, `slug`, `author`, `publisher`, `publish_date`, `description`, `photo`, `state`, `price`, `stock`, `language`, `category_id`) VALUES
 	(1, '9869539327', '傾我所有去生活', 'literature', '蘇美', '避風港文化有限公司', '2017-12-13', '「在這個兵荒馬亂、朝不保夕的世界裡，人人都在留後路。想到還能離婚，才敢結婚；想到共同財產能夠瓜分，才敢買房……其實，一切都沒你想像的那麼重要，給點娛樂精神好不好！」\r\n──大齡文藝女青年、人母、人妻、人師／蘇美\r\n\r\n人生況味千千萬，酸甜苦辣都必須和血吞\r\n不必非得積極，卻得用心體會\r\n向生活，致敬！', 'http://pic.eslite.com/Upload/Product/201712/m/636478003119395644.jpg', 1, 300, 10, 'CH', 1),
@@ -446,7 +458,7 @@ INSERT INTO `ib_book` (`id`, `isbn`, `bookname`, `slug`, `author`, `publisher`, 
 	(64, '3037682248', 'Massive, Expressive, Sculptural', 'architecture', 'Chris van Uffelen', 'Verlagshaus Braun', '2017-11-09', 'Buildings designated brutalist in style were largely built in the 1960s and 1970s, exuding an aura of daring, uncompromising design today. It is the French term "brut,“ meaning raw or unrefined, that lent its name to this particular architectural phenomenon. Vilified for decades as the step-child of modernism, brutalist architecture is now enjoying an astonishing comeback as the latest discovery among digital trendsetters. As well as fascinating users across social networks, brutalism is also inspiring contemporary architecture. Large-scale sculptural forms, coarsely finished materials and floor plans that defy convention merge with contemporary design to generate enthralling new creations. This book offers a sophisticated overview of post-war and contemporary brutalist buildings and of the relationship – in appearance and design, in the grand concepts and the smallest details – between brutalism today and its ancestors.', 'http://pic.eslite.com/Upload/Product/201711/m/636452306512122500.jpg', 1, 1699, 5, 'FR', 9);
 /*!40000 ALTER TABLE `ib_book` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.ib_category 結構
+-- 導出  表 internetbookstore.ib_category 結構
 CREATE TABLE IF NOT EXISTS `ib_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -456,7 +468,7 @@ CREATE TABLE IF NOT EXISTS `ib_category` (
   KEY `IB_category_name_21f2ecfc` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.ib_category 的資料：~9 rows (大約)
+-- 正在導出表  internetbookstore.ib_category 的資料：~9 rows (大約)
 /*!40000 ALTER TABLE `ib_category` DISABLE KEYS */;
 INSERT INTO `ib_category` (`id`, `name`, `slug`) VALUES
 	(1, 'literature', 'literature'),
@@ -470,7 +482,7 @@ INSERT INTO `ib_category` (`id`, `name`, `slug`) VALUES
 	(9, 'else', 'else');
 /*!40000 ALTER TABLE `ib_category` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.ib_comment 結構
+-- 導出  表 internetbookstore.ib_comment 結構
 CREATE TABLE IF NOT EXISTS `ib_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` longtext NOT NULL,
@@ -484,11 +496,11 @@ CREATE TABLE IF NOT EXISTS `ib_comment` (
   CONSTRAINT `IB_comment_book_id_id_78e75312_fk_IB_book_id` FOREIGN KEY (`book_id_id`) REFERENCES `ib_book` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.ib_comment 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.ib_comment 的資料：~0 rows (大約)
 /*!40000 ALTER TABLE `ib_comment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ib_comment` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.ib_discountpolicy 結構
+-- 導出  表 internetbookstore.ib_discountpolicy 結構
 CREATE TABLE IF NOT EXISTS `ib_discountpolicy` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_description` longtext NOT NULL,
@@ -497,11 +509,11 @@ CREATE TABLE IF NOT EXISTS `ib_discountpolicy` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.ib_discountpolicy 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.ib_discountpolicy 的資料：~0 rows (大約)
 /*!40000 ALTER TABLE `ib_discountpolicy` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ib_discountpolicy` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.orders_order 結構
+-- 導出  表 internetbookstore.orders_order 結構
 CREATE TABLE IF NOT EXISTS `orders_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `shipment_cost` int(11) NOT NULL,
@@ -510,30 +522,44 @@ CREATE TABLE IF NOT EXISTS `orders_order` (
   `shipment_date` datetime(6) DEFAULT NULL,
   `arrival_date` datetime(6) DEFAULT NULL,
   `account_id_id` int(11) NOT NULL,
+  `address` varchar(250) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `orders_order_account_id_id_ec951cae_fk_auth_user_id` (`account_id_id`),
   CONSTRAINT `orders_order_account_id_id_ec951cae_fk_auth_user_id` FOREIGN KEY (`account_id_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.orders_order 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.orders_order 的資料：~3 rows (大約)
 /*!40000 ALTER TABLE `orders_order` DISABLE KEYS */;
+INSERT INTO `orders_order` (`id`, `shipment_cost`, `books_cost`, `order_date`, `shipment_date`, `arrival_date`, `account_id_id`, `address`, `phone`, `first_name`, `last_name`) VALUES
+	(1, 60, 1300, '2017-12-27 21:16:56.546572', '2017-12-27 21:16:56.546572', '2017-12-27 21:16:56.547078', 9, '台北市大安區忠孝東路三段277-4號', '0977777771', 'WenXue', 'Tsai'),
+	(2, 60, 200, '2017-12-27 21:23:21.924417', NULL, NULL, 9, '台北市大安區忠孝東路三段277-4號', '0977777771', 'WenXue', 'Tsai'),
+	(3, 60, 200, '2017-12-27 21:27:31.568140', NULL, NULL, 9, '台北市大安區忠孝東路三段277-4號', '0977777771', 'WenXue', 'Tsai');
 /*!40000 ALTER TABLE `orders_order` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.orders_orderlist 結構
+-- 導出  表 internetbookstore.orders_orderlist 結構
 CREATE TABLE IF NOT EXISTS `orders_orderlist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `book_quantity` int(10) unsigned NOT NULL,
   `book_id_id` int(11) NOT NULL,
   `order_id_id` int(11) NOT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `orders_orderlist_book_id_id_4258dde4_fk_IB_book_id` (`book_id_id`),
   KEY `orders_orderlist_order_id_id_0caaf608_fk_orders_order_id` (`order_id_id`),
   CONSTRAINT `orders_orderlist_book_id_id_4258dde4_fk_IB_book_id` FOREIGN KEY (`book_id_id`) REFERENCES `ib_book` (`id`),
   CONSTRAINT `orders_orderlist_order_id_id_0caaf608_fk_orders_order_id` FOREIGN KEY (`order_id_id`) REFERENCES `orders_order` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.orders_orderlist 的資料：~0 rows (大約)
+-- 正在導出表  internetbookstore.orders_orderlist 的資料：~4 rows (大約)
 /*!40000 ALTER TABLE `orders_orderlist` DISABLE KEYS */;
+INSERT INTO `orders_orderlist` (`id`, `book_quantity`, `book_id_id`, `order_id_id`, `price`) VALUES
+	(1, 1, 47, 1, 1100),
+	(2, 1, 7, 1, 200),
+	(3, 1, 7, 2, 200),
+	(4, 1, 7, 3, 200);
 /*!40000 ALTER TABLE `orders_orderlist` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

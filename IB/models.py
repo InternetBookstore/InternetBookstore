@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 # Create your models here.
 
+
 class Category(models.Model):
     name = models.CharField(max_length=50,
                             db_index=True)
@@ -62,14 +63,8 @@ class Book(models.Model):
                        args=[self.id, self.slug])
 
 
-class DiscountPolicy(models.Model):
-    event_description = models.TextField()
-    policy_type = models.CharField(max_length=50)
-    discount = models.FloatField()
-
-
-class Comment(models.Model):
-    book_id = models.ForeignKey(Book, null=True, on_delete=models.CASCADE)
-    account_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    description = models.TextField()
-    date_time = models.DateTimeField()
+# class Comment(models.Model):
+#     book_id = models.ForeignKey(Book, null=True, on_delete=models.CASCADE)
+#     account_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+#     description = models.TextField()
+#     date_time = models.DateTimeField()

@@ -4,6 +4,7 @@ from django.views.decorators.http import require_POST
 from IB.models import Book
 from .cart import Cart
 from .forms import CartAddBookForm
+from discount.models import Discount
 
 # Create your views here.
 
@@ -12,13 +13,21 @@ from .forms import CartAddBookForm
 def cart_add(request, book_id):
     cart = Cart(request)
     book = get_object_or_404(Book, id=book_id)
+
+    try:
+        policy = Discount.objects.get(category=book.category)
+        discount = policy.discount
+    except Discount.DoesNotExist:
+        discount = 1
+
     form = CartAddBookForm(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(book=book,
+                 discount=discount,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
-    return redirect('IB:book_list')
+    return redirect('cart:cart_detail')
 
 
 def cart_remove(request, book_id):

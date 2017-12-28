@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.conf import settings
 from IB.models import Book
+from discount.models import Discount
 
 
 class Cart(object):
@@ -11,10 +12,11 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, book, quantity=1, update_quantity=False):
+    def add(self, book, discount=1, quantity=1, update_quantity=False):
         book_id = str(book.id)
         if book_id not in self.cart:
             self.cart[book_id] = {'quantity': 0,
+                                  'discount': str(book.price - book.price * discount),
                                   'price': str(book.price)}
         if update_quantity:
             self.cart[book_id]['quantity'] = quantity
@@ -40,20 +42,26 @@ class Cart(object):
 
         for item in self.cart.values():
             item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+            item['discount'] = Decimal(item['discount'])
+            item['total_price'] = (
+                item['price'] - item['discount']) * item['quantity']
             yield item
 
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_book_price(self):
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        return sum((Decimal(item['price']) - Decimal(item['discount'])) * item['quantity'] for item in self.cart.values())
 
     def get_shipment_cost(self):
-        return 60
+        try:
+            ship_dis = Discount.objects.get(eventType='shipping')
+            return 0
+        except Discount.DoesNotExist:
+            return 60
 
     def get_total_cost(self):
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values()) + 60
+        return sum((Decimal(item['price']) - Decimal(item['discount'])) * item['quantity'] for item in self.cart.values()) + 60
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]

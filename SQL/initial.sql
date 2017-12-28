@@ -73,9 +73,9 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
--- 正在導出表  internetbookstore.auth_permission 的資料：~39 rows (大約)
+-- 正在導出表  internetbookstore.auth_permission 的資料：~42 rows (大約)
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
 INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALUES
 	(1, 'Can add log entry', 1, 'add_logentry'),
@@ -116,7 +116,10 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 	(36, 'Can delete order', 12, 'delete_order'),
 	(37, 'Can add profile', 13, 'add_profile'),
 	(38, 'Can change profile', 13, 'change_profile'),
-	(39, 'Can delete profile', 13, 'delete_profile');
+	(39, 'Can delete profile', 13, 'delete_profile'),
+	(40, 'Can add discount', 14, 'add_discount'),
+	(41, 'Can change discount', 14, 'change_discount'),
+	(42, 'Can delete discount', 14, 'delete_discount');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 
 -- 導出  表 internetbookstore.auth_user 結構
@@ -139,8 +142,8 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 -- 正在導出表  internetbookstore.auth_user 的資料：~2 rows (大約)
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-	(5, 'pbkdf2_sha256$100000$YufaEcS88JJq$CBaPmpG5zPPlE2cwCcKhA7l+LErNg2NAZgHnIXs42j8=', '2017-12-28 02:52:02.324668', 1, 'admin', '', '', 'admin@yahoo.com.tw', 1, 1, '2017-12-21 09:27:38.106101'),
-	(9, 'pbkdf2_sha256$100000$XyN94Xf7Q6jr$S/G3zN//eJ06eHrynTZMyIJb/cgjomoDLEGTvSDCYbQ=', '2017-12-27 20:40:26.904897', 0, 'wto2005716', 'WenXue', 'Tsai', 'wto2005716@yahoo.com.tw', 0, 1, '2017-12-27 15:58:20.399651');
+	(5, 'pbkdf2_sha256$100000$YufaEcS88JJq$CBaPmpG5zPPlE2cwCcKhA7l+LErNg2NAZgHnIXs42j8=', '2017-12-28 16:31:38.682931', 1, 'admin', '', '', 'admin@yahoo.com.tw', 1, 1, '2017-12-21 09:27:38.106101'),
+	(9, 'pbkdf2_sha256$100000$XyN94Xf7Q6jr$S/G3zN//eJ06eHrynTZMyIJb/cgjomoDLEGTvSDCYbQ=', '2017-12-28 16:34:44.116256', 0, 'wto2005716', 'WenXue', 'Tsai', 'wto2005716@yahoo.com.tw', 0, 1, '2017-12-27 15:58:20.399651');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 
 -- 導出  表 internetbookstore.auth_user_groups 結構
@@ -175,6 +178,28 @@ CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
 /*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
 
+-- 導出  表 internetbookstore.discount_discount 結構
+CREATE TABLE IF NOT EXISTS `discount_discount` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `event_description` longtext NOT NULL,
+  `discount` double NOT NULL,
+  `eventType` varchar(15) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `End_date` datetime(6) NOT NULL,
+  `Start_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `discount_discount_category_id_98406a4f_fk_IB_category_id` (`category_id`),
+  CONSTRAINT `discount_discount_category_id_98406a4f_fk_IB_category_id` FOREIGN KEY (`category_id`) REFERENCES `ib_category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- 正在導出表  internetbookstore.discount_discount 的資料：~0 rows (大約)
+/*!40000 ALTER TABLE `discount_discount` DISABLE KEYS */;
+INSERT INTO `discount_discount` (`id`, `name`, `event_description`, `discount`, `eventType`, `category_id`, `End_date`, `Start_date`) VALUES
+	(1, '文學大特價', '慶祝一年一度文學節，全館文學類書籍打8折喲!!!', 0.8, 'special', 1, '2017-12-31 13:59:50.000000', '2017-12-28 13:59:43.000000'),
+	(2, '小市民福音~', '全館慶祝免免節~現正全館免運費中!!!!!', 1, 'shipping', NULL, '2017-12-31 16:32:56.000000', '2017-12-28 16:32:52.000000');
+/*!40000 ALTER TABLE `discount_discount` ENABLE KEYS */;
+
 -- 導出  表 internetbookstore.django_admin_log 結構
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -190,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- 正在導出表  internetbookstore.django_admin_log 的資料：~72 rows (大約)
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
@@ -266,7 +291,9 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 	(69, '2017-12-27 15:45:46.044080', '4', 'asd', 3, '', 4, 5),
 	(70, '2017-12-27 15:45:52.724306', '3', 'adm', 3, '', 4, 5),
 	(71, '2017-12-27 15:56:52.758315', '7', 'wto2005716', 3, '', 4, 5),
-	(72, '2017-12-27 15:58:08.155113', '8', 'wto2005716', 3, '', 4, 5);
+	(72, '2017-12-27 15:58:08.155113', '8', 'wto2005716', 3, '', 4, 5),
+	(73, '2017-12-28 13:59:58.036657', '1', '文學大特價', 1, '[{"added": {}}]', 14, 5),
+	(74, '2017-12-28 16:34:24.720432', '2', '小市民福音~', 1, '[{"added": {}}]', 14, 5);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 
 -- 導出  表 internetbookstore.django_content_type 結構
@@ -276,9 +303,9 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
--- 正在導出表  internetbookstore.django_content_type 的資料：~13 rows (大約)
+-- 正在導出表  internetbookstore.django_content_type 的資料：~14 rows (大約)
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
 INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 	(13, 'Account', 'profile'),
@@ -287,6 +314,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 	(3, 'auth', 'permission'),
 	(4, 'auth', 'user'),
 	(5, 'contenttypes', 'contenttype'),
+	(14, 'discount', 'discount'),
 	(7, 'IB', 'book'),
 	(10, 'IB', 'category'),
 	(8, 'IB', 'comment'),
@@ -303,9 +331,9 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
--- 正在導出表  internetbookstore.django_migrations 的資料：~25 rows (大約)
+-- 正在導出表  internetbookstore.django_migrations 的資料：~29 rows (大約)
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(1, 'contenttypes', '0001_initial', '2017-12-18 18:51:52.731539'),
@@ -332,7 +360,12 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(22, 'orders', '0003_auto_20171228_0340', '2017-12-27 19:41:05.853695'),
 	(23, 'orders', '0004_auto_20171228_0358', '2017-12-27 19:58:57.627821'),
 	(24, 'orders', '0005_auto_20171228_0429', '2017-12-27 20:29:34.633526'),
-	(25, 'orders', '0006_auto_20171228_0429', '2017-12-27 20:30:02.459327');
+	(25, 'orders', '0006_auto_20171228_0429', '2017-12-27 20:30:02.459327'),
+	(26, 'IB', '0002_auto_20171228_2143', '2017-12-28 13:44:02.980831'),
+	(27, 'orders', '0007_auto_20171228_2143', '2017-12-28 13:44:03.116210'),
+	(28, 'discount', '0001_initial', '2017-12-28 13:49:49.059440'),
+	(29, 'discount', '0002_auto_20171228_2158', '2017-12-28 13:58:20.871337'),
+	(30, 'discount', '0003_auto_20171229_0033', '2017-12-28 16:34:11.026802');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 
 -- 導出  表 internetbookstore.django_session 結構
@@ -350,8 +383,8 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 	('2ipu5pxokl5gud81nkol52aogxprrnup', 'NWQzYjQ5ZTJjYTc0NjVlMjA0NTYyNWRkNmM1OTNkMGNjOTYyYWFhNjp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiY2FydCI6e30sIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiZTM0YWM1NzNhNjFlN2I3MThiNWRhNjkxZTM4N2ZhNjRmYzI2YmM4MyJ9', '2018-01-04 09:28:52.224730'),
 	('3s7htbfzjgg891atqtdggxyhaioivjvn', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-04 09:24:51.850222'),
 	('5xof1cscgph3lcolf3xw398ogpapi9ed', 'ZjdlMmY0ZDRhZTI5YTk5Njk5ZDVhZWIzZGEzNjNjOTM0YjNkYjZjZjp7ImNhcnQiOnt9LCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaGFzaCI6Ijc2OTljZTNkNDFjZmI4NDAxZDJlY2VlMzNkZjA3N2M5YjNmYTE5NzciLCJfYXV0aF91c2VyX2lkIjoiOSJ9', '2018-01-10 18:34:27.391282'),
+	('9sqa3l4nmm3dojc2lj16eejwturfa0ko', 'YzNlNzFiYmE0ZTk1ODM2ZTE3MzhjNzIyYTQ3N2JjM2U2MTJhZTYwZTp7Il9hdXRoX3VzZXJfaWQiOiI5IiwiX2F1dGhfdXNlcl9oYXNoIjoiNzY5OWNlM2Q0MWNmYjg0MDFkMmVjZWUzM2RmMDc3YzliM2ZhMTk3NyIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiY2FydCI6eyI1NiI6eyJkaXNjb3VudCI6IjAiLCJwcmljZSI6IjI2MDAiLCJxdWFudGl0eSI6MX19fQ==', '2018-01-11 16:34:49.170994'),
 	('bo2w89iri4sqdshxopv3lnzuguohrcrq', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 19:01:50.672938'),
-	('cjv78aywvu8zr9bg5esgenrjc3f1dxqx', 'ZmQ3Yzc3MWM1ZTk4NTAwM2FkY2NhMTRhMDJkZWQ5YmIwMjA1ZGIzYTp7Il9hdXRoX3VzZXJfaGFzaCI6IjFlOThmNzJlYjE0ZGZjNWFjYWE0MWM1YjcyOWE4NWYwNTI1MDQxZDkiLCJfYXV0aF91c2VyX2lkIjoiNSIsImNhcnQiOnt9LCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCJ9', '2018-01-11 02:55:38.947586'),
 	('i5ifgsxkuzqe8v2eo5jgy3062o7c64zw', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 18:46:16.158966'),
 	('idut2wh8trmwkhhhn43co0g5s7ke0gzx', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 18:56:06.739855'),
 	('m4ddngbwsuyvoh700ux7v4mlw8wfko0y', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-03 18:45:28.190842'),
@@ -379,7 +412,7 @@ CREATE TABLE IF NOT EXISTS `ib_book` (
   `price` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
   `language` varchar(10) NOT NULL,
-  `category_id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `isbn` (`isbn`),
   KEY `IB_book_id_slug_91e16f65_idx` (`id`,`slug`),
@@ -481,37 +514,6 @@ INSERT INTO `ib_category` (`id`, `name`, `slug`) VALUES
 	(8, 'computer', 'computer'),
 	(9, 'else', 'else');
 /*!40000 ALTER TABLE `ib_category` ENABLE KEYS */;
-
--- 導出  表 internetbookstore.ib_comment 結構
-CREATE TABLE IF NOT EXISTS `ib_comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `description` longtext NOT NULL,
-  `date_time` datetime(6) NOT NULL,
-  `account_id_id` int(11) DEFAULT NULL,
-  `book_id_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IB_comment_account_id_id_38847eac_fk_auth_user_id` (`account_id_id`),
-  KEY `IB_comment_book_id_id_78e75312_fk_IB_book_id` (`book_id_id`),
-  CONSTRAINT `IB_comment_account_id_id_38847eac_fk_auth_user_id` FOREIGN KEY (`account_id_id`) REFERENCES `auth_user` (`id`),
-  CONSTRAINT `IB_comment_book_id_id_78e75312_fk_IB_book_id` FOREIGN KEY (`book_id_id`) REFERENCES `ib_book` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- 正在導出表  internetbookstore.ib_comment 的資料：~0 rows (大約)
-/*!40000 ALTER TABLE `ib_comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ib_comment` ENABLE KEYS */;
-
--- 導出  表 internetbookstore.ib_discountpolicy 結構
-CREATE TABLE IF NOT EXISTS `ib_discountpolicy` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `event_description` longtext NOT NULL,
-  `policy_type` varchar(50) NOT NULL,
-  `discount` double NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- 正在導出表  internetbookstore.ib_discountpolicy 的資料：~0 rows (大約)
-/*!40000 ALTER TABLE `ib_discountpolicy` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ib_discountpolicy` ENABLE KEYS */;
 
 -- 導出  表 internetbookstore.orders_order 結構
 CREATE TABLE IF NOT EXISTS `orders_order` (

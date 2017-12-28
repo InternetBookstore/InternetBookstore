@@ -16,6 +16,7 @@
                         <th>Book</th>
                         <th>Quantity</th>
                         <th class="text-center">Price</th>
+                        <th class="text-center">Discount</th>
                         <th class="text-center">Total</th>
                         <th> </th>
                     </tr>
@@ -52,6 +53,7 @@
                                 </form>
                         </td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>${{ item.price }}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>${{item.discount}}</strong></td>
                         <td class="col-sm-1 col-md-1 text-center"><strong>${{ item.total_price }}</strong></td>
 
                         <td class="col-sm-1 col-md-1">
@@ -66,8 +68,15 @@
                     <td>  </td>
                     <td>  </td>
                     <td>  </td>
+                    <td><h3>Ship Cost</h3></td>
+                    <td class="text-right"><h3><strong>${{ cart.get_shipment_cost }}</strong></h3></td>
+            </tr>
+            <tr>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
                     <td><h3>Total</h3></td>
-                    <td class="text-right"><h3><strong>${{ cart.get_book_price }}</strong></h3></td>
+                    <td class="text-right"><h3><strong>${{ cart.get_total_cost }}</strong></h3></td>
             </tr>
             <tr>
                     <td>  </td>

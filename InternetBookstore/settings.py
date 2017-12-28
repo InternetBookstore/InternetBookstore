@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'orders',
     'Account',
     'discount',
+    'comment',
     'django.contrib.admin',
 ]
 

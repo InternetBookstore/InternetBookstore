@@ -13,3 +13,7 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-timestamp']
+
+
+    def __str__(self):
+        return self.user

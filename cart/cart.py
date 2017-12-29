@@ -61,7 +61,8 @@ class Cart(object):
             return 60
 
     def get_total_cost(self):
-        return sum((Decimal(item['price']) - Decimal(item['discount'])) * item['quantity'] for item in self.cart.values()) + 60
+        ship = self.get_shipment_cost()
+        return sum((Decimal(item['price']) - Decimal(item['discount'])) * item['quantity'] for item in self.cart.values()) +ship
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]

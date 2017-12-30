@@ -62,7 +62,6 @@ class Book(models.Model):
         return reverse('IB:book_detail',
                        args=[self.id, self.slug])
 
-
 # class Comment(models.Model):
 #     book_id = models.ForeignKey(Book, null=True, on_delete=models.CASCADE)
 #     account_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)

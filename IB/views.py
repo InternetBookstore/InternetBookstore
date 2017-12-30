@@ -31,17 +31,20 @@ def book_list(request, category_slug=None):
         books = books.filter(category=category)
     return render(request,
                   'ChineseBooks.html',
-                  { 'category': category,
-                    'categories': categories,
-                    'books': books})
+                  {'category': category,
+                   'categories': categories,
+                   'books': books})
+
+
 def book_detail(request, book_id, slug):
     book = get_object_or_404(Book, id=book_id,
-                             slug=slug,state=True)
+                             slug=slug, state=True)
     cart_book_form = CartAddBookForm()
     return render(request,
                   'bookdetail.html',
-                  {'book':book,
-                   'cart_book_form': cart_book_form})
+                  {'book': book,
+                   'cart_book_form': cart_book_form
+                   })
 
 # def add_book(request):
 #     if request.method == 'POST':

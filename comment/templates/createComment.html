@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block title %}
+    Write Comment
+{% endblock %}
+{% block content %}
+
+      <div>
+          <img src="{{book.photo }}">
+      </div>
+
+      <form action="." method="post">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons %}
+              <button type="submit" class="btn btn-success btn-product">
+                  <span class="glyphicon glyphicon-shopping-cart"></span> OK
+              </button>
+               {% endbuttons %}
+         </form>
+{% endblock %}

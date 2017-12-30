@@ -6,7 +6,7 @@ from django.db.models import Q
 
 from .models import *
 from cart.forms import CartAddBookForm
-
+from comment.models import Comment
 # Create your views here.
 
 
@@ -40,10 +40,15 @@ def book_detail(request, book_id, slug):
     book = get_object_or_404(Book, id=book_id,
                              slug=slug, state=True)
     cart_book_form = CartAddBookForm()
+    try:
+        comments = Comment.objects.filter(book=book_id)
+    except Comment.DoesNotExist:
+        comments = None
     return render(request,
                   'bookdetail.html',
                   {'book': book,
-                   'cart_book_form': cart_book_form
+                   'cart_book_form': cart_book_form,
+                   'comments': comments
                    })
 
 # def add_book(request):

@@ -18,6 +18,8 @@ urlpatterns = [
     # url(r'^$', views.home, name='home'),
     url(r'^account_manage/$', views.account_manage, name='account_manage'),
     url(r'^profile/$', views.update_profile, name='profile'),
+    url(r'^comments/$', views.comments, name='comments'),
+    url(r'^orders/$', views.orders, name='orders'),
     url(r'^register/$', views.register, name='register'),
 
     # login logout

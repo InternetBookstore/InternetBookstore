@@ -16,56 +16,27 @@
 CREATE DATABASE IF NOT EXISTS `internetbookstore` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `internetbookstore`;
 
--- 傾印  表格 internetbookstore.auth_group_permissions 結構
-CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) NOT NULL,
-  `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
-  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
-  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 傾印  未知，應不再出現 internetbookstore. 結構
+CREATE DATABASE IF NOT EXISTS `internetbookstore` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
--- 正在傾印表格  internetbookstore.auth_group_permissions 的資料：~0 rows (大約)
-/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 
--- 傾印  表格 internetbookstore.auth_group 結構
-CREATE TABLE IF NOT EXISTS `auth_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 傾印 information_schema 的資料庫結構
+CREATE DATABASE IF NOT EXISTS `information_schema` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `information_schema`;
 
--- 正在傾印表格  internetbookstore.auth_group 的資料：~0 rows (大約)
-/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+-- 傾印  未知，應不再出現 information_schema. 結構
+CREATE DATABASE IF NOT EXISTS `information_schema` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
--- 傾印  表格 internetbookstore.account_profile 結構
-CREATE TABLE IF NOT EXISTS `account_profile` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `address` varchar(60) DEFAULT NULL,
-  `cellphone` varchar(10) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `credit_card` varchar(50) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id` (`user_id`),
-  CONSTRAINT `Account_profile_user_id_7cdd8c19_fk` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.account_profile 的資料：~1 rows (大約)
-/*!40000 ALTER TABLE `account_profile` DISABLE KEYS */;
-INSERT INTO `account_profile` (`id`, `address`, `cellphone`, `birthday`, `credit_card`, `user_id`) VALUES
-	(1, '台北市大安區忠孝東路三段277-4號', '0977777774', NULL, NULL, 2);
-/*!40000 ALTER TABLE `account_profile` ENABLE KEYS */;
+-- 傾印 internetbookstore 的資料庫結構
+CREATE DATABASE IF NOT EXISTS `internetbookstore` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `internetbookstore`;
 
 -- 傾印  未知，應不再出現 internetbookstore. 結構
 CREATE DATABASE IF NOT EXISTS `internetbookstore` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
+
+-- 傾印  的資料庫結構
 
 -- 傾印 world 的資料庫結構
 CREATE DATABASE IF NOT EXISTS `world` /*!40100 DEFAULT CHARACTER SET utf8 */;

@@ -24,7 +24,7 @@ class Order(models.Model):
         return 'Order {}'.format(self.id)
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+        return sum(item.get_cost() for item in self.items.all()) + self.shipment_cost
 
 
 class OrderList(models.Model):
@@ -39,4 +39,4 @@ class OrderList(models.Model):
         return '{}'.format(self.id)
 
     def get_cost(self):
-        return self.book_price * self.book_quantity
+        return self.price * self.book_quantity

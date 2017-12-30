@@ -45,7 +45,13 @@
             <a href="{% url "comment:createComment" book.id %}">Comment</a>
     </button>
     <div class="col-md-6 col-md-4">
-
+        {% for comment in comments %}
+        <div>
+            <div>writer: {{comment.user}}</div>
+            <div>{{comment.content}}<div>
+            <div> at:{{comment.timestamp}}</div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 

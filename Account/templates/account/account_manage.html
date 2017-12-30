@@ -15,7 +15,11 @@
 
             <div class="active">
                 <a class="list-group-item list-group-item-action"
-                href="">訂單查詢</a>
+                href="{% url "Account:orders" %}">訂單查詢</a>
+            </div>
+            <div>
+                <a class="list-group-item list-group-item-action"
+                href="{% url "Account:comments" %}">評論</a>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ from django import forms
 from cart.cart import Cart
 from .models import OrderList
 from .forms import OrderCreateForm
+from .task import order_created
 # Create your views here.
 
 
@@ -29,6 +30,7 @@ def order_create(request):
                                          book_quantity=item['quantity'],
                                          price=item['price'])
             cart.clear()
+            order_created(request, order.id)
             request.session['order_id'] = order.id
             return redirect('IB:book_list')
     else:

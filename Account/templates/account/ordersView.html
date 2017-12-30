@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
     <div class="row">
         <div class="col-md-3">
             <h3>會員</h3>
@@ -26,13 +25,19 @@
             </div>
         </div>
         <div class="col-md-9">
-            <form action="." method="post" class="form">
-                {% csrf_token %}
-                {% bootstrap_form user_form %}
-                {% bootstrap_form profile_form %}
-              <button type="submit">Save changes</button>
-            </form>
-        </div>
+    {% if orders %}
+    {% for order in orders %}
+    <div>
+        <div>訂單編號: {{order.id}}</div>
+        <div>下訂日期:{{order.order_date}}</div>
+        <div>出貨日期:{{order.shipment_date}}</div>
+        <div>抵達日期:{{order.arrival_date}}</div>
+        <div>送貨地址:{{order.address}}</div>
+        <div>總共費用:{{order.get_total_cost}}</div>
     </div>
+
+    {% endfor %}
+    {% endif %}
+</div>
 </div>
 {% endblock %}

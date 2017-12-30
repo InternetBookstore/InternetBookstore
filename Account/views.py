@@ -5,6 +5,8 @@ from django.contrib import messages
 # Create your views here.
 
 from .forms import *
+from comment.models import Comment
+from orders.models import *
 
 
 @login_required
@@ -61,3 +63,21 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+
+@login_required
+def orders(request):
+    try:
+        orders = Order.objects.filter(account_id=request.user.id)
+    except Order.DoesNotExist:
+        orders = None
+    return render(request, 'Account/ordersView.html', {'orders': orders})
+
+
+@login_required
+def comments(request):
+    try:
+        comments = Comment.objects.filter(user=request.user.id)
+    except Comment.DoesNotExist:
+        comments = None
+    return render(request, 'Account/commentView.html', {'comments': comments})

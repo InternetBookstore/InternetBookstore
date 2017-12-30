@@ -94,7 +94,7 @@ DATABASES = {
         'ENGINE': 'mysql.connector.django',
         'NAME': 'InternetBookstore',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'a228666321',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

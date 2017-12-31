@@ -18,6 +18,8 @@ def createComment(request, book_id):
             comment.user = request.user
             comment.book = book
             comment.save()
+            return redirect('IB:book_detail', book_id=book_id, slug=book.slug)
+
     else:
         form = CommentCreateForm()
     return render(request,

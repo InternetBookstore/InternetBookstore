@@ -1,0 +1,42 @@
+{% extends "./base.html "%}
+{% load staticfiles %}
+
+
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Books{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Categories</h3>
+            <div class="list-group">
+                {% for c in categories %}
+                    <div {% if category.slug == c.slug %}class="active"{% endif %}>
+                        <a class="list-group-item list-group-item-action"
+                        href="{{c.get_absolute_url}}">{{c.name}}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9 book">
+            <h2>{% if category %}{{ category.name }}{% else %}Books{% endif %}</h2>
+            <div class="row">
+                {% for book in books %}
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a href="{{ book.get_absolute_url }}">
+                            <img src="{% if book.photo %}{{ book.photo}}
+                            {% else %}{% static "IB/no_img.png" %} {% endif %}">
+                        </a>
+                        <a href="{{ book.get_absolute_url }}">{{book.bookname }}</a><br>
+                        ${{ book.price }}
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock%}

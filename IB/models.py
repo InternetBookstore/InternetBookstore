@@ -24,6 +24,10 @@ class Category(models.Model):
         return reverse('IB:book_list_by_category',
                        args=[self.slug])
 
+    def get_absolute_url_FR(self):
+        return reverse('IB:book_list_by_category_FR',
+                       args=[self.slug])
+
 
 class Book(models.Model):
     isbn = models.CharField(max_length=30, unique=True)
@@ -61,6 +65,7 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('IB:book_detail',
                        args=[self.id, self.slug])
+
 
 # class Comment(models.Model):
 #     book_id = models.ForeignKey(Book, null=True, on_delete=models.CASCADE)

@@ -21,7 +21,7 @@
 
 <body>
     {% include 'messages.html' %}
-  <ul class="nav nav-tabs justify-content-end">
+  <ul class="nav nav-tabs justify-content-end  sticky-top">
   <li class="nav-item">
   {% if request.user.is_authenticated %}
       <a class="nav-link" href="{% url "Account:account_manage"%}"> Hello {{ request.user.first_name }}</a>
@@ -53,13 +53,13 @@
     </div>
     <ul class="nav nav-tabs justify-content-center nav-justified">
       <li class="nav-item">
-        <a class="nav-link" href="/">主頁</a>
+        <a class="nav-link" href="/">首頁</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url "IB:book_list"%}">中文書</a>
+        <a class="nav-link" href="{% url "IB:book_list" %}">中文書</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">外文書</a>
+        <a class="nav-link" href="{% url "IB:book_list_FR" %}">外文書</a>
       </li>
     </ul>
     {% block content %}

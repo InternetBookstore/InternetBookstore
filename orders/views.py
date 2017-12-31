@@ -32,7 +32,7 @@ def order_create(request):
             cart.clear()
             order_created(request, order.id)
             request.session['order_id'] = order.id
-            return redirect('IB:book_list')
+            return redirect('Account:orders')
     else:
         form = OrderCreateForm()
     return render(request,

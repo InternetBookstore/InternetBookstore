@@ -12,14 +12,10 @@
         <div class="col-md-3">
             <h3>Categories</h3>
             <div class="list-group">
-                <div {% if not category %}class="active"{% endif %}>
-                    <a class="list-group-item list-group-item-action"
-                    href="{% url "IB:book_list"%}" >ALL</a>
-                </div>
                 {% for c in categories %}
                     <div {% if category.slug == c.slug %}class="active"{% endif %}>
                         <a class="list-group-item list-group-item-action"
-                        href="{{c.get_absolute_url}}">{{c.name}}</a>
+                        href="{{c.get_absolute_url_FR}}">{{c.name}}</a>
                     </div>
                 {% endfor %}
             </div>

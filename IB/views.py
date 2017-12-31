@@ -18,10 +18,10 @@ def home(request):
 def book_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    books = Book.objects.filter(state=True)
+    books = Book.objects.filter(state=True, language='CH')
     query = request.GET.get("q")
     if query:
-        books = books.filter(
+        books = Book.objects.filter(
             Q(bookname__icontains=query) |
             Q(author__icontains=query) |
             Q(publisher__icontains=query) |
@@ -31,7 +31,22 @@ def book_list(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         books = books.filter(category=category)
     return render(request,
-                  'ChineseBooks.html',
+                  'Books.html',
+                  {'category': category,
+                   'categories': categories,
+                   'books': books})
+
+
+def book_list_FR(request, category_slug=None):
+    category = None
+    categories = Category.objects.all()
+    books = Book.objects.filter(state=True, language='FR')
+    query = request.GET.get("q")
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        books = books.filter(category=category)
+    return render(request,
+                  'FRBooks.html',
                   {'category': category,
                    'categories': categories,
                    'books': books})
@@ -51,21 +66,3 @@ def book_detail(request, book_id, slug):
                    'cart_book_form': cart_book_form,
                    'comments': comments
                    })
-
-# def add_book(request):
-#     if request.method == 'POST':
-#         form = BookForm(request.POST)
-#         if form.is_valid():
-#             new_book = form.save()
-#             return HttpResponseRedirect('/books/')
-#     form = BookForm()
-#     return render(request, 'add_book.html', {'form': form})
-#
-#
-# def edit_book(request, book_id):
-#     book = Book.objects.get(pk=book_id)
-#     form = BookForm(request.POST, instance=book)
-#     if form.is_valid():
-#         form.save()
-#         return HttpResponseRedirect('/books/')
-#     return render(request, 'edit_book.html', {'form': form})

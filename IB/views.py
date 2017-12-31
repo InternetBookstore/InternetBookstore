@@ -11,7 +11,8 @@ from comment.models import Comment
 
 
 def home(request):
-    return render(request, 'home.html')
+    books = Book.objects.all().order_by('?')[:12]
+    return render(request, 'home.html', {'books': books})
 
 
 def book_list(request, category_slug=None):

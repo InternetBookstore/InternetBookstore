@@ -1,0 +1,10 @@
+.book img {
+    width: 150px;
+    height: 250px;
+    display: block;
+    margin: 0 auto;
+}
+
+.book {
+    text-align: center
+}

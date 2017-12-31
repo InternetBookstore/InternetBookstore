@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 
 from IB.models import Book
 from .cart import Cart
@@ -27,6 +28,10 @@ def cart_add(request, book_id):
                  discount=discount,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
+        messages.success(request,
+                         'Successfully add to cart!')
+    else:
+        messages.error(request, 'The book can\'t be add to cart!')
     return redirect('IB:book_list')
 
 

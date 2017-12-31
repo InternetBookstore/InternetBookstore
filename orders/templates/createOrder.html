@@ -1,31 +1,63 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
     Checkout
 {% endblock %}
 
 {% block content %}
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">Your order</div>
-        <div class="panel-body">
-            <ul class="list-group">
+    <h1>您的訂單</h1>
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-md-offset-1 mx-auto">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Book</th>
+                            <th>Quantity</th>
+                            <th class="text-center">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                 {% for item in cart %}
-                    <li class="list-group-item">
-                        ${{ item.total_price }}
-                        <span class="badge">{{ item.book.bookname }} x{{ item.quantity }}</span>
-                    </li>
-                {% endfor %}
-            </ul>
+                <tr>
+                    <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <a class="thumbnail pull-left" href="{{ item.book.get_absolute_url }}" >
+                                    <img class="media-object"
+                                         src="{% if item.book.photo %}{{ item.book.photo }}
+                                              {% else %}{% static "IB/no_image.png" %}{% endif %}"
+                                         style="width: 72px; height: 72px;">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a
+                                            href="{{ item.book.get_absolute_url }}" style="text-decoration:none">{{ item.book.bookname }}</a></h4>
+                                    <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                </div>
+                            </div>
+                        </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>{{ item.quantity }}</strong></td>
+                        </td>
 
-            <p>ShipmentCost: ${{ cart.get_shipment_cost }}</p>
-            <p>BookCost: ${{ cart.get_book_price }}</p>
-            <p>Total: ${{ cart.get_total_cost }}
+                            <td class="col-sm-1 col-md-1 text-center"><strong>${{ item.total_price }}</strong></td>
+                        </td>
+                </tr>
+                    {% endfor %}
+            <tr>
+                <td> </td>
+                <td>
+                    <strong><p>ShipCost:</p></strong>
+                    <strong><p>Total:</p></strong>
+                </td>
+                <td>
+                    <strong><p> ${{ cart.get_shipment_cost }}</p></strong>
+                    <strong><p> ${{ cart.get_total_cost }}</p></strong>
+                </td>
+            </tr>
+            <tr>
 
-        </div>
-    </div>
-
-    <h1>Checkout</h1>
+            <td> </td>
+    <td><h3>Checkout</h3></td>
+    <td>
     <form action="." method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
@@ -35,5 +67,10 @@
             </button>
         {% endbuttons %}
     </form>
-
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 {% endblock %}

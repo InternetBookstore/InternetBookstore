@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django import forms
+from django.contrib import messages
 
 from cart.cart import Cart
 from .models import OrderList
@@ -33,7 +34,11 @@ def order_create(request):
             cart.clear()
             order_created(request, order.id)
             request.session['order_id'] = order.id
+            messages.success(request,
+                             'Your order was successfully placed!Please Check your email!')
             return redirect('IB:book_list')
+        else:
+            messages.error(request, 'Your order got somthing wrong!')
     else:
         form = OrderCreateForm()
     return render(request,

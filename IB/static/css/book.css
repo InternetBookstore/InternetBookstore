@@ -1,3 +1,7 @@
+* {
+    font-family: 微軟正黑體;
+}
+
 .book img {
     width: 150px;
     height: 250px;
@@ -9,12 +13,13 @@
     text-align: center
 }
 
-.border_image{
+.border_image {
     border: 10px solid transparent;
     padding: 15px;
     border-image: url(border.png) 30 stretch;
 }
 
-*{
-  font-family: 微軟正黑體;
+.scroll {
+    height: 500px;
+    overflow-y: scroll;
 }

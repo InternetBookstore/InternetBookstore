@@ -27,7 +27,7 @@ def cart_add(request, book_id):
                  discount=discount,
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
-    return redirect('cart:cart_detail')
+    return redirect('IB:book_list')
 
 
 def cart_remove(request, book_id):

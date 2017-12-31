@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% load bootstrap3 %}
 {% block title %}
     {{ request.user.first_name }}的會員中心
@@ -18,6 +19,10 @@
                     <a class="list-group-item list-group-item-action"
                     href="{% url "Account:orders" %}">訂單查詢</a>
                 </div>
+                <div class="active">
+                    <a class="list-group-item list-group-item-action"
+                    href="{% url "Account:ordersHistory" %}">訂單歷史查詢</a>
+                </div>
                 <div>
                     <a class="list-group-item list-group-item-action"
                     href="{% url "Account:comments" %}">評論</a>
@@ -25,16 +30,33 @@
             </div>
         </div>
         <div class="col-md-9">
+            <div>
+                <h3 style="text-align:center">評論</h3>
+            </div>
     {% if comments %}
+    <div class="scroll">
+    <div class="row">
     {% for comment in comments %}
-    <div>
-        <div>book: {{comment.book.bookname}}</div>
-        <div>{{comment.content}}</div>
-        <div> at:{{comment.timestamp}}</div>
+    <div class="col-sm-3">
+        <img src="{% if comment.book.photo %}{{ comment.book.photo}}
+        {% else %}{% static "IB/no_img.png" %} {% endif %}"
+        class="float-right" style="height:120px;width:60px">
     </div>
-
+    <div class="card col-sm-8">
+        <div class="card-body">
+        <h5 class="card-title">
+            <a href="{% url "IB:book_detail" comment.book.id comment.book.slug %}"
+             style="text-decoration:none">
+                Book: {{comment.book.bookname}}
+            </a>
+        </h5>
+        <p class="card-text">{{comment.content}}</p>
+        <p class="card-text float-right"> at:{{comment.timestamp}}</p>
+    </div>
+    </div>
     {% endfor %}
     {% endif %}
+</div>
 </div>
 </div>
 {% endblock %}

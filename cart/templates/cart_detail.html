@@ -7,9 +7,9 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Your shopping cart</h1>
+    <h1>購物車</h1>
     <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <div class="col-sm-12 col-md-10 col-md-offset-1 mx-auto">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -27,7 +27,7 @@
                     <tr>
                         <td class="col-sm-8 col-md-6">
                             <div class="media">
-                                <a class="thumbnail pull-left" href="{{ book.get_absolute_url }}">
+                                <a class="thumbnail pull-left" href="{{ book.get_absolute_url }}" >
                                     <img class="media-object"
                                          src="{% if book.photo %}{{ book.photo }}
                                               {% else %}{% static "IB/no_image.png" %}{% endif %}"
@@ -35,7 +35,7 @@
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading"><a
-                                            href="{{ book.get_absolute_url }}">{{ book.bookname }}</a></h4>
+                                            href="{{ book.get_absolute_url }}" style="text-decoration:none">{{ book.bookname }}</a></h4>
                                     <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
                                 </div>
                             </div>
@@ -68,30 +68,38 @@
                     <td>  </td>
                     <td>  </td>
                     <td>  </td>
-                    <td><h3>Ship Cost</h3></td>
-                    <td class="text-right"><h3><strong>${{ cart.get_shipment_cost }}</strong></h3></td>
+                    <td>  </td>
+                    <td><h5>Ship Cost</h5></td>
+                    <td class="text-right"><h5><strong>${{ cart.get_shipment_cost }}</strong></h3></td>
             </tr>
             <tr>
                     <td>  </td>
                     <td>  </td>
                     <td>  </td>
-                    <td><h3>Total</h3></td>
-                    <td class="text-right"><h3><strong>${{ cart.get_total_cost }}</strong></h3></td>
+                    <td>  </td>
+                    <td><h5>Total</h5></td>
+                    <td class="text-right"><h5><strong>${{ cart.get_total_cost }}</strong></h3></td>
             </tr>
             <tr>
                     <td>  </td>
                     <td>  </td>
                     <td>  </td>
-                    <td>
-                        <a href="{% url "IB:book_list"%}" class="btn btn-default">
-                            Continue Shopping <i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-                        </a>
-                    </td>
+                    <td> </td>
                     <td>
 
-                        <a href="{% url "orders:order_create" %}" class="btn btn-default">Checkout
-                            <i class="glyphicon glyphicon-play" aria-hidden="true"></i>
+                        <button  type="button" class="btn btn-light">
+                        <a href="{% url "IB:book_list"%}" class="btn btn-default">
+                            Continue Shopping
                         </a>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-light">
+                        <a href="{% url "orders:order_create" %}" class="btn btn-default">Checkout
+                        </a>
+                    </button>
+
+
                     </td>
                 </tr>
                 </tbody>

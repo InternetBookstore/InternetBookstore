@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from datetime import datetime
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
 from .models import *
@@ -30,11 +31,14 @@ def book_list(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         books = books.filter(category=category)
+    paginator = Paginator(books, 9)
+    page = request.GET.get('page')
+    contacts = paginator.get_page(page)
     return render(request,
                   'Books.html',
                   {'category': category,
                    'categories': categories,
-                   'books': books})
+                   'books': contacts})
 
 
 def book_list_FR(request, category_slug=None):
@@ -45,11 +49,14 @@ def book_list_FR(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         books = books.filter(category=category)
+    paginator = Paginator(books, 9)
+    page = request.GET.get('page')
+    contacts = paginator.get_page(page)
     return render(request,
                   'FRBooks.html',
                   {'category': category,
                    'categories': categories,
-                   'books': books})
+                   'books': contacts})
 
 
 def book_detail(request, book_id, slug):

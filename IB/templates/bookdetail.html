@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
+
 <div class="border_image">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-5 mx-auto">
         <div class="thumbnail">
             <p></p>
             <img src="{% if book.photo %}{{ book.photo }}
@@ -29,45 +29,47 @@
                         <p>出版日期 / {{book.publish_date}}</p>
                         <p>語言 / {{book.language}}</p>
                         <p>定價 / {{book.price}}</p>
-                        <p>存貨數量 / {{book.stock}}</p>
-                        <p>書籍種類 / <a href="{{ book.category.get_absolute_url }}">{{ book.category }}</a></p>
+                        <p>存貨 / <span class="badge badge-success">In Stock</span></p>
+                        <p>書籍種類 / <a href="{{ book.category.get_absolute_url }}" style="text-decoration: none;">
+                            {{ book.category }}</a></p>
                         <p> </p>
+
+                        <form action="{% url "cart:cart_add" book.id %}" method="post">
+                                    {% csrf_token %}
+                                    {% bootstrap_form cart_book_form %}
+                                    {% buttons %}
+                                        <button type="submit" class="btn btn-success btn-product">
+                                            <span class="glyphicon glyphicon-shopping-cart"></span> Add to cart
+                                        </button>
+                                    {% endbuttons %}
+                        </form>
                     </div>
                 </div>
               </div>
             </div>
-            <div class="card">
+
+    <div class="row">
+            <div class="card col-md-6">
               <div class="card-body">
                 <h4 class ="card-title">內容簡介</h4>
                 <p class="card-text">{{ book.description }}</p>
               </div>
               <p></p>
             </div>
-                <form action="{% url "cart:cart_add" book.id %}" method="post">
-                            {% csrf_token %}
-                            {% bootstrap_form cart_book_form %}
-                            {% buttons %}
-                                <button type="submit" class="btn btn-success btn-product">
-                                    <span class="glyphicon glyphicon-shopping-cart"></span> Add to cart
-                                </button>
-                            {% endbuttons %}
-                        </form>
 
-        </div>
-    </div>
-    <button type="button" class="btn btn-light" >
-            <a href="{% url "comment:createComment" book.id %}">Comment</a>
-    </button>
-    <div class="col-md-6 col-md-4">
+    <div class="card col-md-6">
+        <button type="button" class="btn btn-light" >
+                <a href="{% url "comment:createComment" book.id %}" style="text-decoration: none;">Comment</a>
+        </button>
         {% for comment in comments %}
-        <div>
-            <div>writer: {{comment.user}}</div>
-            <div>{{comment.content}}<div>
-            <div> at:{{comment.timestamp}}</div>
+        <div class="card">
+            <div class="card-body">
+             <h5 class="card-title">Writer: {{comment.user}}</h5>
+            <p class="card-text">{{comment.content}}</p>
+            <p class="card-text float-right"> At:{{comment.timestamp}}</p>
+        </div>
         </div>
         {% endfor %}
     </div>
-</div>
-
 </div>
 {% endblock%}

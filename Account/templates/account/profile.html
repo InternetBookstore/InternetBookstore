@@ -19,6 +19,10 @@
                     <a class="list-group-item list-group-item-action"
                     href="{% url "Account:orders" %}">訂單查詢</a>
                 </div>
+                <div class="active">
+                    <a class="list-group-item list-group-item-action"
+                    href="{% url "Account:ordersHistory" %}">訂單歷史查詢</a>
+                </div>
                 <div>
                     <a class="list-group-item list-group-item-action"
                     href="{% url "Account:comments" %}">評論</a>
@@ -30,7 +34,7 @@
                 {% csrf_token %}
                 {% bootstrap_form user_form %}
                 {% bootstrap_form profile_form %}
-              <button type="submit">Save changes</button>
+              <button type="submit" class="btn btn-success">Save changes</button>
             </form>
         </div>
     </div>

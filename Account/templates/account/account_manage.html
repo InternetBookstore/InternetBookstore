@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}
     {{ request.user.first_name }}的會員中心
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="row">
     <div class="col-md-3">
         <h3>會員</h3>
         <div class="list-group">
@@ -17,6 +18,10 @@
                 <a class="list-group-item list-group-item-action"
                 href="{% url "Account:orders" %}">訂單查詢</a>
             </div>
+            <div class="active">
+                <a class="list-group-item list-group-item-action"
+                href="{% url "Account:ordersHistory" %}">訂單歷史查詢</a>
+            </div>
             <div>
                 <a class="list-group-item list-group-item-action"
                 href="{% url "Account:comments" %}">評論</a>
@@ -24,7 +29,17 @@
         </div>
     </div>
     <div class="col-md-9">
-
+        <div>
+            <h3 style="text-align:center">簡介</h3>
+        </div>
+        <div class="card mx-auto" style="width:200px">
+          <img class="card-img-top" src="{% if request.user.photo %}{{ request.user.photo}}
+          {% else %}{% static "IB/no.jpg" %} {% endif %}" alt="Card image">
+            <div class="card-body">
+                <h4 class="card-title">{{request.user.first_name}} {{request.user.last_name}}</h4>
+                <p class="card-text">Email: {{request.user.email}}</p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock%}

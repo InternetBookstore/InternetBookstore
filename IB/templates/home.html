@@ -12,12 +12,12 @@
         {% for book in books %}
         <div class="col-md-3 book">
             <div class="thumbnail">
-                <a href="{{ book.get_absolute_url }}">
+                <a href="{{ book.get_absolute_url }}" style="text-decoration: none;">
                     <img src="{% if book.photo %}{{ book.photo}}
                     {% else %}{% static "IB/no_img.png" %} {% endif %}">
                 </a>
                 <div>
-                <a href="{{ book.get_absolute_url }}">{{book.bookname }}</a><br>
+                <a href="{{ book.get_absolute_url }}" style="text-decoration: none;">{{book.bookname }}</a><br>
             </div>
                 ${{ book.price }}
             </div>

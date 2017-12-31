@@ -28,11 +28,12 @@ def order_create(request):
                 OrderList.objects.create(order_id=order,
                                          book_id=item['book'],
                                          book_quantity=item['quantity'],
-                                         price=item['price'])
+                                         price=item['price'],
+                                         discount=item['discount'])
             cart.clear()
             order_created(request, order.id)
             request.session['order_id'] = order.id
-            return redirect('Account:orders')
+            return redirect('IB:book_list')
     else:
         form = OrderCreateForm()
     return render(request,

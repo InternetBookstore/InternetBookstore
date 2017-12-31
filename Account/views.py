@@ -7,6 +7,7 @@ from django.contrib import messages
 from .forms import *
 from comment.models import Comment
 from orders.models import *
+from IB.models import Book
 
 
 @login_required
@@ -68,10 +69,30 @@ def update_profile(request):
 @login_required
 def orders(request):
     try:
-        orders = Order.objects.filter(account_id=request.user.id)
+        orders = Order.objects.filter(
+            account_id=request.user.id, arrival_date=None)
     except Order.DoesNotExist:
         orders = None
     return render(request, 'Account/ordersView.html', {'orders': orders})
+
+
+@login_required
+def ordersHistory(request):
+    try:
+        orders = Order.objects.exclude(
+            account_id=request.user.id, arrival_date=None)
+    except Order.DoesNotExist:
+        orders = None
+    return render(request, 'Account/ordersHistoryView.html', {'orders': orders})
+
+
+@login_required
+def orderdetail(request, order_id):
+    order = Order.objects.get(id=order_id)
+    orderlists = OrderList.objects.filter(order_id=order_id)
+    return render(request, 'Account/orderdetail.html', {'order': order,
+                                                        'orderlists': orderlists,
+                                                        })
 
 
 @login_required

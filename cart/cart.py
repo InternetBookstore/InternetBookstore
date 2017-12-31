@@ -16,7 +16,7 @@ class Cart(object):
         book_id = str(book.id)
         if book_id not in self.cart:
             self.cart[book_id] = {'quantity': 0,
-                                  'discount': str(book.price - book.price * discount),
+                                  'discount': str(int(book.price - book.price * discount)),
                                   'price': str(book.price)}
         if update_quantity:
             self.cart[book_id]['quantity'] = quantity
@@ -62,7 +62,7 @@ class Cart(object):
 
     def get_total_cost(self):
         ship = self.get_shipment_cost()
-        return sum((Decimal(item['price']) - Decimal(item['discount'])) * item['quantity'] for item in self.cart.values()) +ship
+        return sum((Decimal(item['price']) - Decimal(item['discount'])) * item['quantity'] for item in self.cart.values()) + ship
 
     def clear(self):
         del self.session[settings.CART_SESSION_ID]

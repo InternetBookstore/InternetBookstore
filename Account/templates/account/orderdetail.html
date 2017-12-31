@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}
+    Your shopping cart
+{% endblock %}
+
+{% block content %}
+    <h1>訂單編號:{{order.id}}</h1>
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1 mx-auto">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Quantity</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Discount</th>
+                        <th class="text-center">Total</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for orderitem in orderlists %}
+                    <tr>
+                        <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <a class="thumbnail pull-left" href="{{ orderitem.book_id.get_absolute_url }}">
+                                    <img class="media-object"
+                                         src="{% if orderitem.book_id.photo %}{{ orderitem.book_id.photo }}
+                                              {% else %}{% static "IB/no_image.png" %}{% endif %}"
+                                         style="width: 72px; height: 72px;">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a
+                                            href="{{  orderitem.book_id.get_absolute_url }}" style="text-decoration:none">{{  orderitem.book_id.bookname }}</a></h4>
+                        </td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>{{ orderitem.book_quantity }}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>${{orderitem.book_id.price}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>${{orderitem.discount}}</strong></td>
+                        <td class="col-sm-1 col-md-1 text-center"><strong>${{orderitem.get_cost}}</strong></td>
+                        {% endfor %}
+                    </tr>
+
+            <tr>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+
+                    <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td><h5>Ship Cost</h5></td>
+                            <td class="text-right"><h5><strong>${{ order.shipment_cost }}</strong></h3></td>
+                    </tr>
+                    <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td><h5>Total</h5></td>
+                            <td class="text-right"><h5><strong>${{ order.get_total_cost }}</strong></h3></td>
+                    </tr>
+            </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+                    </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}

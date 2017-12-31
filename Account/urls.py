@@ -20,6 +20,9 @@ urlpatterns = [
     url(r'^profile/$', views.update_profile, name='profile'),
     url(r'^comments/$', views.comments, name='comments'),
     url(r'^orders/$', views.orders, name='orders'),
+    url(r'^ordersHistory/$', views.ordersHistory, name='ordersHistory'),
+    url(r'^ordersdetail/(?P<order_id>\d+)/$',
+        views.orderdetail, name='orderdetail'),
     url(r'^register/$', views.register, name='register'),
 
     # login logout

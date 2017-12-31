@@ -34,9 +34,10 @@ class OrderList(models.Model):
         Book, related_name='order_items', on_delete=models.CASCADE)
     book_quantity = models.PositiveIntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=0)
+    discount = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return '{}'.format(self.id)
 
     def get_cost(self):
-        return self.price * self.book_quantity
+        return (self.price - self.discount) * self.book_quantity

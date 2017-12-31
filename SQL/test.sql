@@ -138,8 +138,8 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 -- 正在傾印表格  internetbookstore.auth_user 的資料：~2 rows (大約)
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-	(1, 'pbkdf2_sha256$100000$U4VA14URzxO2$rUxRRcvIc8eNoSsT4T/0D96EIouvlZf1cjiZm9GS41o=', NULL, 1, 'admin', '', '', 'admin@gmail.com', 1, 1, '2017-12-30 10:25:39.290165'),
-	(2, 'pbkdf2_sha256$100000$KLJxoywx6wbs$EJW2H4fPuepx2c5sa7FolRmkOo1FNxHLpmiQ7ZzDIuA=', '2017-12-30 10:27:35.107341', 0, 'wto2005716', 'Tsai', 'WenXue', 'wto2005716@yahoo.com.tw', 0, 1, '2017-12-30 10:26:27.300748');
+	(1, 'pbkdf2_sha256$100000$U4VA14URzxO2$rUxRRcvIc8eNoSsT4T/0D96EIouvlZf1cjiZm9GS41o=', '2017-12-31 21:51:24.701634', 1, 'admin', '', '', 'admin@gmail.com', 1, 1, '2017-12-30 10:25:39.290165'),
+	(2, 'pbkdf2_sha256$100000$KLJxoywx6wbs$EJW2H4fPuepx2c5sa7FolRmkOo1FNxHLpmiQ7ZzDIuA=', '2017-12-31 22:15:40.254613', 0, 'wto2005716', 'Tsai', 'WenXue', 'wto2005716@yahoo.com.tw', 0, 1, '2017-12-30 10:26:27.300748');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 
 -- 傾印  表格 internetbookstore.auth_user_groups 結構
@@ -186,14 +186,21 @@ CREATE TABLE IF NOT EXISTS `comment_comment` (
   KEY `comment_comment_user_id_6078e57b_fk_auth_user_id` (`user_id`),
   CONSTRAINT `comment_comment_book_id_60245be4_fk_IB_book_id` FOREIGN KEY (`book_id`) REFERENCES `ib_book` (`id`),
   CONSTRAINT `comment_comment_user_id_6078e57b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.comment_comment 的資料：~3 rows (大約)
+-- 正在傾印表格  internetbookstore.comment_comment 的資料：~10 rows (大約)
 /*!40000 ALTER TABLE `comment_comment` DISABLE KEYS */;
 INSERT INTO `comment_comment` (`id`, `content`, `timestamp`, `book_id`, `user_id`) VALUES
 	(1, 'GOOD~~~', '2017-12-30 10:27:42.046195', 105, 2),
 	(4, 'Nice to read~', '2017-12-30 14:55:47.191296', 37, 2),
-	(5, '好看 哈哈', '2017-12-30 15:40:17.265335', 98, 2);
+	(5, '好看 哈哈', '2017-12-30 15:40:17.265335', 98, 2),
+	(6, '喵喵喵~', '2017-12-31 06:13:30.628836', 17, 2),
+	(7, '好看好看', '2017-12-31 06:44:54.704689', 98, 2),
+	(8, '穿穿穿', '2017-12-31 06:48:59.026889', 93, 2),
+	(9, '汪汪~~', '2017-12-31 06:50:09.399873', 132, 2),
+	(10, '嗚嗚', '2017-12-31 06:50:52.695106', 132, 2),
+	(11, 'XDXD', '2017-12-31 07:00:12.195454', 132, 2),
+	(12, 'GOOD~~~~', '2017-12-31 22:16:14.074834', 56, 2);
 /*!40000 ALTER TABLE `comment_comment` ENABLE KEYS */;
 
 -- 傾印  表格 internetbookstore.discount_discount 結構
@@ -209,10 +216,12 @@ CREATE TABLE IF NOT EXISTS `discount_discount` (
   PRIMARY KEY (`id`),
   KEY `discount_discount_category_id_98406a4f_fk_IB_category_id` (`category_id`),
   CONSTRAINT `discount_discount_category_id_98406a4f_fk_IB_category_id` FOREIGN KEY (`category_id`) REFERENCES `ib_category` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.discount_discount 的資料：~0 rows (大約)
+-- 正在傾印表格  internetbookstore.discount_discount 的資料：~1 rows (大約)
 /*!40000 ALTER TABLE `discount_discount` DISABLE KEYS */;
+INSERT INTO `discount_discount` (`id`, `name`, `event_description`, `discount`, `eventType`, `category_id`, `End_date`, `Start_date`) VALUES
+	(1, '文學大特價', '慶祝文學節~~全館文學類書籍打8折優~!!!', 0.8, 'seasonings', 1, '2018-01-31 21:52:16.000000', '2017-12-31 21:52:10.000000');
 /*!40000 ALTER TABLE `discount_discount` ENABLE KEYS */;
 
 -- 傾印  表格 internetbookstore.django_admin_log 結構
@@ -230,10 +239,12 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.django_admin_log 的資料：~0 rows (大約)
+-- 正在傾印表格  internetbookstore.django_admin_log 的資料：~1 rows (大約)
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
+	(1, '2017-12-31 21:52:27.071895', '1', '文學大特價', 1, '[{"added": {}}]', 12, 1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 
 -- 傾印  表格 internetbookstore.django_content_type 結構
@@ -270,9 +281,9 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.django_migrations 的資料：~31 rows (大約)
+-- 正在傾印表格  internetbookstore.django_migrations 的資料：~32 rows (大約)
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(1, 'contenttypes', '0001_initial', '2017-12-30 10:21:58.182781'),
@@ -305,7 +316,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(28, 'auth', '0008_alter_user_username_max_length', '2017-12-30 10:23:35.455459'),
 	(29, 'auth', '0009_alter_user_last_name_max_length', '2017-12-30 10:23:37.040514'),
 	(30, 'comment', '0001_initial', '2017-12-30 10:23:38.662038'),
-	(31, 'sessions', '0001_initial', '2017-12-30 10:23:39.223571');
+	(31, 'sessions', '0001_initial', '2017-12-30 10:23:39.223571'),
+	(32, 'orders', '0008_orderlist_discount', '2017-12-31 21:47:55.821861');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 
 -- 傾印  表格 internetbookstore.django_session 結構
@@ -320,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 -- 正在傾印表格  internetbookstore.django_session 的資料：~1 rows (大約)
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-	('4tn5hlrfbcvnl1qr9dq3z0wnja07oi7x', 'MjJiZTI1NThmMTNmZWVkMmI5NDU2NjRlZDEyMzhlNGRiZGU3MDkxMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImE3OTc4ZjY0ZWZkYTdlNmM3OGZhODdjMjFkNGJkNDNlNGQ2ZjJhNDQiLCJfYXV0aF91c2VyX2lkIjoiMiIsIm9yZGVyX2lkIjozLCJjYXJ0Ijp7fSwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQifQ==', '2018-01-13 16:25:58.656173');
+	('bmxl2nw2xwekbs1leckx8m2nitdiwxzv', 'ZTkyYzNiMjg1MjdjZmQwNmM4MjhmZjY3ZjMyZGYxYjc0NDA4M2ZmMzp7ImNhcnQiOnt9fQ==', '2018-01-14 22:34:36.183574');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 
 -- 傾印  表格 internetbookstore.ib_book 結構
@@ -572,14 +584,17 @@ CREATE TABLE IF NOT EXISTS `orders_order` (
   PRIMARY KEY (`id`),
   KEY `orders_order_account_id_id_ec951cae_fk` (`account_id_id`),
   CONSTRAINT `orders_order_account_id_id_ec951cae_fk` FOREIGN KEY (`account_id_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.orders_order 的資料：~3 rows (大約)
+-- 正在傾印表格  internetbookstore.orders_order 的資料：~6 rows (大約)
 /*!40000 ALTER TABLE `orders_order` DISABLE KEYS */;
 INSERT INTO `orders_order` (`id`, `shipment_cost`, `books_cost`, `order_date`, `shipment_date`, `arrival_date`, `account_id_id`, `address`, `phone`, `first_name`, `last_name`) VALUES
-	(1, 60, 280, '2017-12-30 16:05:56.096655', NULL, NULL, 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue'),
+	(1, 60, 280, '2017-12-30 16:05:56.096655', '2018-01-01 03:57:36.000000', '2018-01-01 03:57:40.000000', 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue'),
 	(2, 60, 280, '2017-12-30 16:25:03.001555', NULL, NULL, 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue'),
-	(3, 60, 280, '2017-12-30 16:25:53.880466', NULL, NULL, 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue');
+	(3, 60, 280, '2017-12-30 16:25:53.880466', NULL, NULL, 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue'),
+	(4, 60, 340, '2017-12-31 19:10:26.279376', NULL, NULL, 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue'),
+	(5, 60, 5320, '2017-12-31 21:44:53.017474', NULL, NULL, 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue'),
+	(6, 60, 1600, '2017-12-31 21:57:04.402762', NULL, NULL, 2, '台北市大安區忠孝東路三段277-4號', '0977777774', 'Tsai', 'WenXue');
 /*!40000 ALTER TABLE `orders_order` ENABLE KEYS */;
 
 -- 傾印  表格 internetbookstore.orders_orderlist 結構
@@ -589,19 +604,24 @@ CREATE TABLE IF NOT EXISTS `orders_orderlist` (
   `book_id_id` int(11) NOT NULL,
   `order_id_id` int(11) NOT NULL,
   `price` decimal(10,0) DEFAULT NULL,
+  `discount` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `orders_orderlist_book_id_id_4258dde4_fk_IB_book_id` (`book_id_id`),
   KEY `orders_orderlist_order_id_id_0caaf608_fk_orders_order_id` (`order_id_id`),
   CONSTRAINT `orders_orderlist_book_id_id_4258dde4_fk_IB_book_id` FOREIGN KEY (`book_id_id`) REFERENCES `ib_book` (`id`),
   CONSTRAINT `orders_orderlist_order_id_id_0caaf608_fk_orders_order_id` FOREIGN KEY (`order_id_id`) REFERENCES `orders_order` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- 正在傾印表格  internetbookstore.orders_orderlist 的資料：~3 rows (大約)
+-- 正在傾印表格  internetbookstore.orders_orderlist 的資料：~7 rows (大約)
 /*!40000 ALTER TABLE `orders_orderlist` DISABLE KEYS */;
-INSERT INTO `orders_orderlist` (`id`, `book_quantity`, `book_id_id`, `order_id_id`, `price`) VALUES
-	(1, 1, 98, 1, 280),
-	(2, 1, 98, 2, 280),
-	(3, 1, 98, 3, 280);
+INSERT INTO `orders_orderlist` (`id`, `book_quantity`, `book_id_id`, `order_id_id`, `price`, `discount`) VALUES
+	(1, 1, 98, 1, 280, 0),
+	(2, 1, 98, 2, 280, 0),
+	(3, 1, 98, 3, 280, 0),
+	(4, 1, 145, 4, 340, 0),
+	(5, 2, 98, 5, 280, 0),
+	(6, 7, 126, 5, 680, 0),
+	(7, 5, 116, 6, 399, 79);
 /*!40000 ALTER TABLE `orders_orderlist` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

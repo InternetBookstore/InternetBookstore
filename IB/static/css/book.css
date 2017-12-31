@@ -8,3 +8,13 @@
 .book {
     text-align: center
 }
+
+.border_image{
+    border: 10px solid transparent;
+    padding: 15px;
+    border-image: url(border.png) 30 stretch;
+}
+
+*{
+  font-family: 微軟正黑體;
+}

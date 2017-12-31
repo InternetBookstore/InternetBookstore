@@ -8,27 +8,41 @@
 
 {% block content %}
 <div class="row">
-<div class="col-md-12">
-    <div class="col-md-6 col-md-4">
-
-    </div>
-    <div class="col-md-6 col-md-4">
+<div class="border_image">
+  <div class="row">
+    <div class="col-md-5">
         <div class="thumbnail">
+            <p></p>
             <img src="{% if book.photo %}{{ book.photo }}
                       {% else %}{% static "IB/no_image.png" %}{% endif %}"
                  class="img-responsive">
-            <div class="caption">
-                <div class="row">
-                    <div class="col-md-6 col-xs-6">
-                        <h3>{{ book.name }}</h3>
-                    </div>
-                    <div class="col-md-6 col-xs-6 price">
-                        <h3>
-                            <label>${{ book.price }}</label></h3>
+                 <p></p>
+             </div>
+             </div>
+             <div class="col-md-6">
+                    <div class="col-md-10 col-xs-6">
+                        <p> </p>
+                        <h3>{{ book.bookname }}</h3>
+                        <p> </p>
+                        <p>作者 / {{book.author}}</p>
+                        <p>出版社 / {{book.publisher}}</p>
+                        <p>出版日期 / {{book.publish_date}}</p>
+                        <p>語言 / {{book.language}}</p>
+                        <p>定價 / {{book.price}}</p>
+                        <p>存貨數量 / {{book.stock}}</p>
+                        <p>書籍種類 / <a href="{{ book.category.get_absolute_url }}">{{ book.category }}</a></p>
+                        <p> </p>
                     </div>
                 </div>
-                <p>{{ book.description }}</p>
-                <h2><a href="{{ book.category.get_absolute_url }}">{{ book.category }}</a></h2>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h4 class ="card-title">內容簡介</h4>
+                <p class="card-text">{{ book.description }}</p>
+              </div>
+              <p></p>
+            </div>
                 <form action="{% url "cart:cart_add" book.id %}" method="post">
                             {% csrf_token %}
                             {% bootstrap_form cart_book_form %}
@@ -38,7 +52,7 @@
                                 </button>
                             {% endbuttons %}
                         </form>
-            </div>
+
         </div>
     </div>
     <button type="button" class="btn btn-light" >

@@ -12,14 +12,4 @@ class Profile(models.Model):
     cellphone = models.CharField(max_length=10, null=True)
     birthday = models.DateField(null=True, blank=True)
     credit_card = models.CharField(max_length=50, blank=True, null=True)
-
-
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwarg):
-#     if created:
-#         Profile.objects.create(user=instance)
-
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwarg):
-#     instance.profile.save()
+    photo = models.URLField(null=True, default=None, blank=True)

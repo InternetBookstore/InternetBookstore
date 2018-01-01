@@ -34,8 +34,8 @@
                 <h3 style="text-align:center">評論</h3>
             </div>
     {% if comments %}
-    <div class="scroll">
-    <div class="row">
+
+    <div class="row scroll">
     {% for comment in comments %}
     <div class="col-sm-3">
         <img src="{% if comment.book.photo %}{{ comment.book.photo}}
@@ -57,6 +57,6 @@
     {% endfor %}
     {% endif %}
 </div>
-</div>
+
 </div>
 {% endblock %}

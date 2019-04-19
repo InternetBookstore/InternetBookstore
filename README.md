@@ -7,6 +7,7 @@ From the begining design of the database to the implementation of the whole proj
 
 # Techniques
 
+- [Bootstrap](https://getbootstrap.com/)
 - [Django(web framework of python)](https://www.djangoproject.com/)
 - [MySQL(database)](https://www.mysql.com/)
 
